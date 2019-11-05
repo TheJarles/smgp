@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sprites/tile_sets/minimal_tile_set.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="MinimalTiles" type="Node"]
+
+[node name="Spike" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Spike"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike/StaticBody2D"]
+position = Vector2( 8, 8 )
+shape = SubResource( 1 )
+
+[node name="LightBlock" type="Sprite" parent="."]
+position = Vector2( 32, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 16, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LightBlock"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightBlock/StaticBody2D"]
+position = Vector2( 8, 8 )
+shape = SubResource( 1 )
+
+[node name="DarkBlock" type="Sprite" parent="."]
+position = Vector2( 64, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 32, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="DarkBlock"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DarkBlock/StaticBody2D"]
+position = Vector2( 8, 8 )
+shape = SubResource( 1 )
