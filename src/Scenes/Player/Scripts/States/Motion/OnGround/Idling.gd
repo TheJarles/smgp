@@ -25,8 +25,6 @@ func handle_input(event):
 	else:
 		.handle_input(event)
 
-	return .handle_input(event)
-
 func set_animation(animation_name):
 	var pos = animation_player.get_current_animation_position()
 	animation_player.play(animation_name)
