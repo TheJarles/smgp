@@ -18,14 +18,14 @@ func handle_input(event):
 
 	if event.is_action_pressed("up"):
 		animation_name += "Up " + animation_flip
-		set_animation(animation_name)
+		seamless_transition(animation_name)
 	elif event.is_action_released("up"):
 		animation_name += animation_flip
-		set_animation(animation_name)
+		seamless_transition(animation_name)
 	else:
 		.handle_input(event)
 
-func set_animation(animation_name):
+func seamless_transition(animation_name):
 	var pos = animation_player.get_current_animation_position()
 	animation_player.play(animation_name)
 	animation_player.advance(pos)

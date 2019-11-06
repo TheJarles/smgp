@@ -53,7 +53,6 @@ func _change_state(state_name):
 	current_state.exit()
 	
 	if state_name == "previous":
-		print(states_stack)
 		states_stack.pop_front()
 	else:
 		states_stack[0] = states_map[state_name]
