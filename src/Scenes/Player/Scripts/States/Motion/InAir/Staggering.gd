@@ -43,6 +43,7 @@ func update(delta):
 	if velocity.y >= 0 and !peak_height:
 		peak_height = owner.get_global_position().y
 	velocity = owner.move_and_slide(velocity, FLOOR)
+	owner.check_for_contact_damage()
 
 
 func exit():
@@ -61,7 +62,6 @@ func _on_stagger_timed_out():
 	if owner.is_on_floor() and (Input.is_action_pressed("right") or Input.is_action_pressed("left")):
 		emit_signal("finished", "running")
 	elif owner.is_on_floor() and buffer_jump:
-		print("Buffer Jump!")
 		emit_signal("finished", "jumping")
 	elif owner.is_on_floor():
 		emit_signal("finished", "idling")

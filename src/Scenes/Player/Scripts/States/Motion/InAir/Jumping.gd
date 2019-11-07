@@ -40,7 +40,7 @@ func stop_jump():
 	velocity.y = 0
 	peak_height = owner.get_global_position().y
 	current_gravity = GRAVITY * clamp((HIGH_GRAVITY * jump_height() / JUMP_HEIGHT), 1, 1.75)
-	print(GRAVITY, " ", current_gravity, " ", GRAVITY * HIGH_GRAVITY)
+#	print(GRAVITY, " ", current_gravity, " ", GRAVITY * HIGH_GRAVITY)
 	jump_stopped = true
 
 
@@ -80,6 +80,7 @@ func update(delta):
 
 	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
 	velocity = owner.move_and_slide(velocity, FLOOR)
+	owner.check_for_contact_damage()
 
 	fall_distance = abs(jump_height(peak_height))
 	if fall_distance > 96 and velocity.y > 0:
@@ -88,7 +89,7 @@ func update(delta):
 			animation_player.play(animation_name)
 
 	if owner.is_on_floor():
-		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
+#		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
 #		print("Vertical Distance at Peak: ", (abs(owner.get_global_position().y - peak_height)))
 		if buffer_jump:
 			delay_timer.stop()

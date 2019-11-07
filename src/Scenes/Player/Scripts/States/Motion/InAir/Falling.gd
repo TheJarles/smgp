@@ -41,6 +41,7 @@ func update(delta):
 		velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
 	velocity.y = min(velocity.y + (GRAVITY * HIGH_GRAVITY), TERMINAL_VELOCITY)
 	velocity = owner.move_and_slide(velocity, FLOOR)
+	owner.check_for_contact_damage()
 	fall_distance = abs(fall_start - owner.get_global_position().y)
 	
 	if fall_distance > 96 and !animation_player.get_current_animation().begins_with("Fall "):

@@ -41,6 +41,7 @@ func update(delta):
 		else:
 			velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
 	velocity = owner.move_and_slide(velocity, FLOOR)
+	owner.check_for_contact_damage()
 	.update(delta)
 
 

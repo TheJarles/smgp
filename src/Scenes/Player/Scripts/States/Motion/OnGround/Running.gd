@@ -24,6 +24,7 @@ func update(delta):
 		update_look_direction(direction)
 		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * direction), -HORIZONTAL_SPEED, HORIZONTAL_SPEED)
 		velocity = owner.move_and_slide(velocity, FLOOR)
+		owner.check_for_contact_damage()
 	else:
 		emit_signal("finished", "idling")
 	.update(delta)
