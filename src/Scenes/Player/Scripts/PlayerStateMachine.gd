@@ -18,8 +18,6 @@ func _ready():
 		$Staggering: "staggering",
 		$Falling: "falling",
 	}
-	for child in get_children():
-		owner.connect("direction_changed", self, "_on_direction_changed")
 	owner.get_node("AnimationPlayer").connect("animation_finished", self, "_on_animation_finished")
 	owner.get_node("AnimationPlayer").set_animation_process_mode(0)
 	owner.get_node("Timer").connect("timeout", self, "_on_timed_out")

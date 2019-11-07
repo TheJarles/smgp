@@ -49,10 +49,8 @@ func update(delta):
 			delay_timer.stop()
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
-			.exit()
 			emit_signal("finished", "running")
 		else:
-			.exit()
 			emit_signal("finished", "idling")
 
 
