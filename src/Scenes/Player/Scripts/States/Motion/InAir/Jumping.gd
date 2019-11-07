@@ -1,13 +1,15 @@
 extends "./InAir.gd"
 
-const JUMP_HEIGHT = 198
+const JUMP_HEIGHT = 200
+const MINIMUM_HEIGHT = 96
 
-export(float) var JUMP_VELOCITY = -1166
+export(float) var JUMP_VELOCITY = -1171
 
-onready var delay_timer = owner.get_node("Timer")
+onready var delay_timer = owner.get_node("BufferTimer")
 
 var jump_start = 0
 var peak_height = 0
+var horizontal_start = 0
 var current_gravity = 0
 var jump_released = false
 var jump_stopped = false
@@ -20,6 +22,7 @@ func enter():
 	buffer_jump = false
 	fall_distance = 0
 	peak_height = 0
+	horizontal_start = owner.get_global_position().x
 #	gravity_reset = false
 	velocity = enter_velocity
 	velocity.y = JUMP_VELOCITY + GRAVITY
@@ -36,7 +39,8 @@ func jump_height(start = jump_start):
 func stop_jump():
 	velocity.y = 0
 	peak_height = owner.get_global_position().y
-	current_gravity = GRAVITY * (HIGH_GRAVITY * jump_height() / JUMP_HEIGHT)
+	current_gravity = GRAVITY * clamp((HIGH_GRAVITY * jump_height() / JUMP_HEIGHT), 1, 1.75)
+	print(GRAVITY, " ", current_gravity, " ", GRAVITY * HIGH_GRAVITY)
 	jump_stopped = true
 
 
@@ -47,50 +51,45 @@ func handle_input(event):
 			stop_jump()
 	elif event.is_action_pressed("jump"):
 		buffer_jump = true
-		delay_timer.start(delay_timer.get_wait_time())
+		delay_timer.start()
 	else:
 		.handle_input(event)
 
 
 func update(delta):
+
 	var direction = get_input_direction()
 	if direction:
 		update_look_direction(direction)
-		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * ACCELERATION_MULTIPLIER * direction),
+		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * direction),
 				-HORIZONTAL_SPEED, HORIZONTAL_SPEED)
 	elif owner.look_direction == 1:
-		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION * ACCELERATION_MULTIPLIER), 0)
+		velocity.x = max(velocity.x - HORIZONTAL_ACCELERATION, 0)
 	else:
-		velocity.x = min(velocity.x + (HORIZONTAL_ACCELERATION * ACCELERATION_MULTIPLIER), 0)
+		velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
+
 	if jump_height() < 0:
 		current_gravity = GRAVITY * HIGH_GRAVITY
-	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
-	velocity = owner.move_and_slide(velocity, FLOOR)
+
 	if jump_height() >= MINIMUM_HEIGHT and jump_released and !jump_stopped:
 		stop_jump()
-	if velocity.y > 0 and !jump_stopped:
-		peak_height = owner.get_global_position().y if !peak_height else peak_height
-#		if !gravity_reset:
-#			gravity_reset = true
-#			current_gravity = 0
-#		else:
-		current_gravity = GRAVITY * HIGH_GRAVITY
-#		if !animation_player.get_current_animation().begins_with("Fall"):
-#			var animation_name = "Fall " + animation_flip
-#			animation_player.play(animation_name)
-#	if jump_stopped:
-#		if !gravity_reset:
-#			gravity_reset = true
-#			current_gravity = 0
-#		else:
-#			current_gravity = GRAVITY * (HIGH_GRAVITY * jump_height() / JUMP_HEIGHT)
-	fall_distance = abs(jump_height(peak_height))
 
+	if velocity.y >= 0 and !jump_stopped:
+		peak_height = owner.get_global_position().y if !peak_height else peak_height
+		current_gravity = GRAVITY * HIGH_GRAVITY
+
+	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
+	velocity = owner.move_and_slide(velocity, FLOOR)
+
+	fall_distance = abs(jump_height(peak_height))
 	if fall_distance > 96 and velocity.y > 0:
 		if !animation_player.get_current_animation().begins_with("Fall"):
 			var animation_name = "Fall " + animation_flip
 			animation_player.play(animation_name)
+
 	if owner.is_on_floor():
+		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
+#		print("Vertical Distance at Peak: ", (abs(owner.get_global_position().y - peak_height)))
 		if buffer_jump:
 			delay_timer.stop()
 			emit_signal("finished", "jumping")
@@ -98,9 +97,6 @@ func update(delta):
 			emit_signal("finished", "running")
 		else:
 			emit_signal("finished", "idling")
-#		else:
-#			.exit()
-#			emit_signal("finished", "previous")
 
 
 func _on_direction_changed(direction):

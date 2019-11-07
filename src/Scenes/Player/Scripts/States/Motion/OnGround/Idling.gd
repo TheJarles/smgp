@@ -40,7 +40,7 @@ func update(delta):
 			velocity.x = max(velocity.x - HORIZONTAL_ACCELERATION, 0)
 		else:
 			velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
-	owner.move_and_slide(velocity, FLOOR)
+	velocity = owner.move_and_slide(velocity, FLOOR)
 	.update(delta)
 
 

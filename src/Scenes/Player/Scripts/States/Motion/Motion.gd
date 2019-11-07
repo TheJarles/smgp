@@ -2,7 +2,7 @@ extends "../State.gd"
 
 const FLOOR = Vector2(0, -1)
 
-export(float) var HORIZONTAL_SPEED = 400
+export(float) var HORIZONTAL_SPEED = 407
 export(float) var HORIZONTAL_ACCELERATION = HORIZONTAL_SPEED / 3
 export(float) var GRAVITY = 50
 
@@ -12,6 +12,7 @@ var velocity = Vector2()
 func handle_input(event):
 	if event.is_action_pressed("simulate damage"):
 		emit_signal("finished", "staggering")
+
 
 func initialize(init_velocity):
 	enter_velocity = init_velocity

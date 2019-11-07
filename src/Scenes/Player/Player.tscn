@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/Scenes/Player/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/animated_sprites/watson_move_set.png" type="Texture" id=2]
@@ -218,7 +218,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=14]
 length = 0.18
-loop = true
 step = 0.18
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -235,7 +234,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=15]
 length = 0.18
-loop = true
 step = 0.18
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -282,6 +280,23 @@ tracks/0/keys = {
 "values": [ 84, 85 ]
 }
 
+[sub_resource type="Animation" id=18]
+resource_name = "Damage"
+length = 0.12
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 __meta__ = {
@@ -293,7 +308,7 @@ position = Vector2( 0, -1 )
 texture = ExtResource( 2 )
 vframes = 18
 hframes = 15
-frame = 79
+frame = 78
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -318,8 +333,17 @@ shape = SubResource( 1 )
 "anims/Turn Left" = SubResource( 16 )
 "anims/Turn Right" = SubResource( 17 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="EffectsPlayer" type="AnimationPlayer" parent="."]
+anims/Damage = SubResource( 18 )
+
+[node name="BufferTimer" type="Timer" parent="."]
+process_mode = 0
 wait_time = 0.07
+one_shot = true
+
+[node name="StaggerTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.36
 one_shot = true
 
 [node name="StateMachine" type="Node" parent="."]

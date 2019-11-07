@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
+
 signal direction_changed(new_direction)
+
 
 var look_direction = 1 setget set_look_direction
 

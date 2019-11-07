@@ -1,10 +1,11 @@
 extends "./InAir.gd"
 
-onready var delay_timer = owner.get_node("Timer")
+onready var delay_timer = owner.get_node("BufferTimer")
 
 var fall_start = 0
 var coyote_time = true
 var buffer_jump = false
+var pre_fall = 0
 
 func enter():
 	fall_start = owner.get_global_position().y
@@ -14,6 +15,7 @@ func enter():
 	buffer_jump = false
 	animation_player.clear_queue()
 	delay_timer.start(delay_timer.get_wait_time())
+
 
 func handle_input(event):
 	if event.is_action_pressed("jump"):
@@ -26,16 +28,17 @@ func handle_input(event):
 	else:
 		.handle_input(event)
 
+
 func update(delta):
 	var direction = get_input_direction()
 	if direction:
 		update_look_direction(direction)
-		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * ACCELERATION_MULTIPLIER * direction),
+		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * direction),
 				-HORIZONTAL_SPEED, HORIZONTAL_SPEED)
 	elif owner.look_direction == 1:
-		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION * ACCELERATION_MULTIPLIER), 0)
+		velocity.x = max(velocity.x - HORIZONTAL_ACCELERATION, 0)
 	else:
-		velocity.x = min(velocity.x + (HORIZONTAL_ACCELERATION * ACCELERATION_MULTIPLIER), 0)
+		velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
 	velocity.y = min(velocity.y + (GRAVITY * HIGH_GRAVITY), TERMINAL_VELOCITY)
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	fall_distance = abs(fall_start - owner.get_global_position().y)
@@ -45,7 +48,6 @@ func update(delta):
 		animation_player.play(animation_name)
 	if owner.is_on_floor():
 		if buffer_jump:
-			print("Buffered Jump!")
 			delay_timer.stop()
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
@@ -54,11 +56,17 @@ func update(delta):
 			emit_signal("finished", "idling")
 
 
+func exit():
+	pre_fall = 0
+	.exit()
+
+
 func _on_direction_changed(direction):
 	if direction == 1:
 		animation_flip = "Right"
 	else:
 		animation_flip = "Left"
+
 
 func _on_timed_out():
 	if coyote_time:
