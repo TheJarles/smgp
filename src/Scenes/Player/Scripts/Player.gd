@@ -16,4 +16,3 @@ func check_for_contact_damage():
 		var collision = get_slide_collision(i)
 		if collision:
 			emit_signal("collided", collision, self)
-

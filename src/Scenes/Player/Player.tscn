@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/Scenes/Player/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/animated_sprites/watson_move_set.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/Scenes/Player/Scripts/States/Motion/InAir/Jumping.gd" type="Script" id=6]
 [ext_resource path="res://src/Scenes/Player/Scripts/States/Motion/InAir/Staggering.gd" type="Script" id=7]
 [ext_resource path="res://src/Scenes/Player/Scripts/States/Motion/InAir/Falling.gd" type="Script" id=8]
+[ext_resource path="res://src/Scenes/Player/Scripts/StatusStateMachine.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 15.75 )
@@ -344,21 +345,28 @@ process_mode = 0
 wait_time = 0.36
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="PlayerStateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
-START_STATE = NodePath("Idling")
+START_STATE = NodePath("../PlayerStateMachine/Idling")
 
-[node name="Idling" type="Node" parent="StateMachine"]
+[node name="Idling" type="Node" parent="PlayerStateMachine"]
 script = ExtResource( 4 )
 
-[node name="Running" type="Node" parent="StateMachine"]
+[node name="Running" type="Node" parent="PlayerStateMachine"]
 script = ExtResource( 5 )
 
-[node name="Jumping" type="Node" parent="StateMachine"]
+[node name="Jumping" type="Node" parent="PlayerStateMachine"]
 script = ExtResource( 6 )
 
-[node name="Staggering" type="Node" parent="StateMachine"]
+[node name="Staggering" type="Node" parent="PlayerStateMachine"]
 script = ExtResource( 7 )
 
-[node name="Falling" type="Node" parent="StateMachine"]
+[node name="Falling" type="Node" parent="PlayerStateMachine"]
 script = ExtResource( 8 )
+
+[node name="StatusStateMachine" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="Invulnerable" type="Node" parent="StatusStateMachine"]
+
+[node name="Normal" type="Node" parent="StatusStateMachine"]

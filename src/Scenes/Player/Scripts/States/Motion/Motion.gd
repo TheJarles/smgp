@@ -8,6 +8,10 @@ export(float) var GRAVITY = 50
 
 var enter_velocity = Vector2()
 var velocity = Vector2()
+var animation_flip = ""
+
+onready var animation_player = owner.get_node("AnimationPlayer")
+
 
 func handle_input(event):
 	if event.is_action_pressed("simulate damage"):

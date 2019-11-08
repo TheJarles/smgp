@@ -25,14 +25,16 @@ func _ready():
 	owner.get_node("StaggerTimer").connect("timeout", self, "_on_stagger_timed_out")
 
 
+func current_state_to_string():
+	return state_names[current_state]
+
+
 func _change_state(state_name):
 	if not _active:
 		return
 	if current_state == $Staggering and state_name == "falling":
 		$Falling.fall_start = $Staggering.peak_height
-	if state_name in ["staggering", "jumping", "falling"]:
-		states_stack.push_front(states_map[state_name])
-	if !(state_name in ["staggering", "previous"]):
+	if state_name != "staggering":
 		states_map[state_name].initialize(current_state.velocity)
 	._change_state(state_name)
 

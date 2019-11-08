@@ -12,7 +12,7 @@ var peak_height = 0
 onready var buffer_timer = owner.get_node("BufferTimer")
 onready var stagger_timer = owner.get_node("StaggerTimer")
 
-func ready():
+func _ready():
 	owner.get_node("StaggerTimer").connect("timeout", self, "_on_stagger_timed_out")
 
 
