@@ -13,6 +13,7 @@ func enter():
 	velocity = enter_velocity
 	coyote_time = true
 	buffer_jump = false
+	damage = false
 	animation_player.clear_queue()
 	delay_timer.start(delay_timer.get_wait_time())
 
@@ -39,8 +40,8 @@ func update(delta):
 		velocity.x = max(velocity.x - HORIZONTAL_ACCELERATION, 0)
 	else:
 		velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
-	velocity.y = min(velocity.y + (GRAVITY * HIGH_GRAVITY), TERMINAL_VELOCITY)
 	velocity = owner.move_and_slide(velocity, FLOOR)
+	velocity.y = min(velocity.y + (GRAVITY * HIGH_GRAVITY), TERMINAL_VELOCITY)
 	owner.check_for_contact_damage()
 	fall_distance = abs(fall_start - owner.get_global_position().y)
 	
@@ -48,6 +49,8 @@ func update(delta):
 		var animation_name = "Fall " + animation_flip
 		animation_player.play(animation_name)
 	if owner.is_on_floor():
+		if damage:
+			emit_signal("finished", "staggering")
 		if buffer_jump:
 			delay_timer.stop()
 			emit_signal("finished", "jumping")

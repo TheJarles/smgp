@@ -15,5 +15,6 @@ func _on_actor_collided(collision, actor):
 			print("Current State Node: ", actor.get_node("PlayerStateMachine").current_state)
 			print("Current State: ", actor.get_node("PlayerStateMachine").current_state_to_string())
 			print("Entering stagger state")
+			actor.get_node("PlayerStateMachine").current_state.damage = true
 			actor.get_node("PlayerStateMachine").current_state.emit_signal("finished", "staggering")
 			print("Current State: ", actor.get_node("PlayerStateMachine").current_state_to_string())

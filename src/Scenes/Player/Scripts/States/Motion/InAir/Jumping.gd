@@ -17,6 +17,7 @@ var gravity_reset = false
 var buffer_jump = false
 
 func enter():
+	damage = false
 	jump_released = false
 	jump_stopped = false
 	buffer_jump = false
@@ -78,8 +79,8 @@ func update(delta):
 		peak_height = owner.get_global_position().y if !peak_height else peak_height
 		current_gravity = GRAVITY * HIGH_GRAVITY
 
-	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
 	velocity = owner.move_and_slide(velocity, FLOOR)
+	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
 	owner.check_for_contact_damage()
 
 	fall_distance = abs(jump_height(peak_height))
@@ -91,6 +92,8 @@ func update(delta):
 	if owner.is_on_floor():
 #		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
 #		print("Vertical Distance at Peak: ", (abs(owner.get_global_position().y - peak_height)))
+		if damage:
+			emit_signal("finished", "staggering")
 		if buffer_jump:
 			delay_timer.stop()
 			emit_signal("finished", "jumping")
@@ -98,6 +101,7 @@ func update(delta):
 			emit_signal("finished", "running")
 		else:
 			emit_signal("finished", "idling")
+		
 
 
 func _on_direction_changed(direction):

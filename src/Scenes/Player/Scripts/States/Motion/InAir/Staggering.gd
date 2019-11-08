@@ -39,10 +39,10 @@ func handle_input(event):
 func update(delta):
 	if owner.get_global_position().y > start_height:
 		current_gravity = GRAVITY * HIGH_GRAVITY
+	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
 	if velocity.y >= 0 and !peak_height:
 		peak_height = owner.get_global_position().y
-	velocity = owner.move_and_slide(velocity, FLOOR)
 	owner.check_for_contact_damage()
 
 

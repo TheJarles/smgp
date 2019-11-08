@@ -342,7 +342,7 @@ one_shot = true
 
 [node name="StaggerTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.36
+wait_time = 0.48
 one_shot = true
 
 [node name="PlayerStateMachine" type="Node" parent="."]
