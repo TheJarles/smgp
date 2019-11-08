@@ -345,6 +345,8 @@ process_mode = 0
 wait_time = 0.48
 one_shot = true
 
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+
 [node name="PlayerStateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
 START_STATE = NodePath("../PlayerStateMachine/Idling")

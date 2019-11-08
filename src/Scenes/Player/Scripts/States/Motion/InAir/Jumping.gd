@@ -14,7 +14,6 @@ var current_gravity = 0
 var jump_released = false
 var jump_stopped = false
 var gravity_reset = false
-var buffer_jump = false
 
 func enter():
 	damage = false
@@ -81,7 +80,7 @@ func update(delta):
 
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
-	owner.check_for_contact_damage()
+	owner.check_for_collision_damage()
 
 	fall_distance = abs(jump_height(peak_height))
 	if fall_distance > 96 and velocity.y > 0:
@@ -93,8 +92,9 @@ func update(delta):
 #		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
 #		print("Vertical Distance at Peak: ", (abs(owner.get_global_position().y - peak_height)))
 		if damage:
+			print("ouch")
 			emit_signal("finished", "staggering")
-		if buffer_jump:
+		elif buffer_jump:
 			delay_timer.stop()
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
@@ -111,5 +111,6 @@ func _on_direction_changed(direction):
 	animation_player.play(animation_name)
 	animation_player.advance(pos)
 
-func _on_timed_out():
-	buffer_jump = false
+
+func _on_received_damage():
+	return ._on_received_damage()

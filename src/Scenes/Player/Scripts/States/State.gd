@@ -25,3 +25,7 @@ func _on_animation_finished(animation):
 
 func _on_direction_changed(direction):
 	return
+
+
+func _on_received_damage():
+	return

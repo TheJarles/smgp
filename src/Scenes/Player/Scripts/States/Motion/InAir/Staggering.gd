@@ -5,7 +5,6 @@ const JUMP_MAX_HEIGHT = 200
 const HORIZONTAL_KNOCKBACK = 222
 
 var start_height = 0
-var buffer_jump = false
 var current_gravity = GRAVITY
 var peak_height = 0
 
@@ -43,7 +42,7 @@ func update(delta):
 	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
 	if velocity.y >= 0 and !peak_height:
 		peak_height = owner.get_global_position().y
-	owner.check_for_contact_damage()
+	owner.check_for_collision_damage()
 
 
 func exit():

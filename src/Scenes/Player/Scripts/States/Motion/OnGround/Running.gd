@@ -25,7 +25,7 @@ func update(delta):
 		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * direction), -HORIZONTAL_SPEED, HORIZONTAL_SPEED)
 		velocity = owner.move_and_slide(velocity, FLOOR)
 		velocity.y = GRAVITY
-		owner.check_for_contact_damage()
+		owner.check_for_collision_damage()
 		.update(delta)
 	else:
 		emit_signal("finished", "idling")
@@ -38,3 +38,7 @@ func _on_animation_finished(animation):
 
 func _on_direction_changed(direction):
 	return ._on_direction_changed(direction)
+
+
+func _on_received_damage():
+	emit_signal("finished", "staggering")

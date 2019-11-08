@@ -42,9 +42,13 @@ func update(delta):
 			velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = GRAVITY
-	owner.check_for_contact_damage()
+	owner.check_for_collision_damage()
 	.update(delta)
 
 
 func _on_direction_changed(direction):
 	return ._on_direction_changed(direction)
+
+
+func _on_received_damage():
+	emit_signal("finished", "staggering")

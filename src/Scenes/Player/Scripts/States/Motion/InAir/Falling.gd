@@ -4,16 +4,15 @@ onready var delay_timer = owner.get_node("BufferTimer")
 
 var fall_start = 0
 var coyote_time = true
-var buffer_jump = false
 var pre_fall = 0
 
 func enter():
+	damage = false
 	fall_start = owner.get_global_position().y
 	fall_distance = 0
 	velocity = enter_velocity
 	coyote_time = true
 	buffer_jump = false
-	damage = false
 	animation_player.clear_queue()
 	delay_timer.start(delay_timer.get_wait_time())
 
@@ -42,7 +41,7 @@ func update(delta):
 		velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = min(velocity.y + (GRAVITY * HIGH_GRAVITY), TERMINAL_VELOCITY)
-	owner.check_for_contact_damage()
+	owner.check_for_collision_damage()
 	fall_distance = abs(fall_start - owner.get_global_position().y)
 	
 	if fall_distance > 96 and !animation_player.get_current_animation().begins_with("Fall "):
@@ -51,7 +50,7 @@ func update(delta):
 	if owner.is_on_floor():
 		if damage:
 			emit_signal("finished", "staggering")
-		if buffer_jump:
+		elif buffer_jump:
 			delay_timer.stop()
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
@@ -81,4 +80,8 @@ func _on_timed_out():
 		animation_player.advance(animation_player.current_animation_length)
 		animation_player.stop()
 	else:
-		buffer_jump = false
+		._on_timed_out()
+
+
+func _on_received_damage():
+	return ._on_received_damage()

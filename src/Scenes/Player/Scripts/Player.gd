@@ -11,7 +11,7 @@ func set_look_direction(value):
 	look_direction = value
 	emit_signal("direction_changed", value)
 
-func check_for_contact_damage():
+func check_for_collision_damage():
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision:
