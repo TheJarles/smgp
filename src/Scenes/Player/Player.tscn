@@ -304,15 +304,13 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -1 )
 texture = ExtResource( 2 )
 vframes = 18
 hframes = 15
-frame = 78
+frame = 90
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 0.25 )
+position = Vector2( 0, 1.25 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
