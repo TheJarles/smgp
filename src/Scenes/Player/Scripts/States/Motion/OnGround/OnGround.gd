@@ -4,7 +4,7 @@ extends "../Motion.gd"
 func handle_input(event):
 	if event.is_action_pressed("jump"):
 		emit_signal("finished", "jumping")
-	.handle_input(event)
+
 
 func update(delta):
 	if !owner.is_on_floor():

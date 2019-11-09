@@ -7,9 +7,6 @@ var fall_distance = 0
 var buffer_jump = false
 var damage = false
 
-func handle_input(event):
-	.handle_input(event)
-
 
 func exit():
 	owner.get_node("BufferTimer").stop()

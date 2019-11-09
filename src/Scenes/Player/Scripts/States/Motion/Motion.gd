@@ -13,11 +13,6 @@ var animation_flip = ""
 onready var animation_player = owner.get_node("AnimationPlayer")
 
 
-func handle_input(event):
-	if event.is_action_pressed("simulate damage"):
-		emit_signal("finished", "staggering")
-
-
 func initialize(init_velocity):
 	enter_velocity = init_velocity
 
