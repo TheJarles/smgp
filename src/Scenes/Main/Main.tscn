@@ -45,7 +45,7 @@ margin_top = 7.0
 margin_right = 119.0
 margin_bottom = 58.0
 
-[node name="Position" type="Label" parent="CanvasLayer/Panel"]
+[node name="Status" type="Label" parent="CanvasLayer/Panel"]
 margin_left = 7.0
 margin_top = 71.0
 margin_right = 121.0

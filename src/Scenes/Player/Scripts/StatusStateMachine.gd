@@ -1,5 +1,12 @@
-#extends "./StateMachine.gd"
-extends Node
+extends "./StateMachine.gd"
+
 
 func _ready():
-	pass
+	states_map = {
+		"invulnerable": $Invulnerable,
+		"normal": $Normal,
+	}
+
+
+func _on_received_damage():
+	current_state._on_received_damage()

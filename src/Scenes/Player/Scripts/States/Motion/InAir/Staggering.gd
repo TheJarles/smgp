@@ -25,7 +25,6 @@ func enter():
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	var animation_name = "Stagger " + animation_flip
 	animation_player.play(animation_name)
-	owner.get_node("EffectsPlayer").play("Damage")
 	stagger_timer.start()
 
 
@@ -46,8 +45,6 @@ func update(delta):
 
 
 func exit():
-	owner.get_node("EffectsPlayer").stop()
-	owner.get_node("Sprite").modulate = Color(1, 1, 1, 1)
 	stagger_timer.stop()
 	buffer_timer.stop()
 
@@ -57,7 +54,6 @@ func _on_timed_out():
 
 
 func _on_stagger_timed_out():
-	exit()
 	if owner.is_on_floor() and (Input.is_action_pressed("right") or Input.is_action_pressed("left")):
 		emit_signal("finished", "running")
 	elif owner.is_on_floor() and buffer_jump:
@@ -66,4 +62,3 @@ func _on_stagger_timed_out():
 		emit_signal("finished", "idling")
 	else:
 		emit_signal("finished", "falling")
-

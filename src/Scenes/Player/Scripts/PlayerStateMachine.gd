@@ -1,7 +1,5 @@
 extends "./StateMachine.gd"
 
-# Helper map for checking current state
-
 func _ready():
 	states_map = {
 		"idling": $Idling,

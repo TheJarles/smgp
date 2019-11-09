@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/Scenes/Player/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/animated_sprites/watson_move_set.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://src/Scenes/Player/Scripts/States/Motion/InAir/Staggering.gd" type="Script" id=7]
 [ext_resource path="res://src/Scenes/Player/Scripts/States/Motion/InAir/Falling.gd" type="Script" id=8]
 [ext_resource path="res://src/Scenes/Player/Scripts/StatusStateMachine.gd" type="Script" id=9]
+[ext_resource path="res://src/Scenes/Player/Scripts/States/Invulnerable.gd" type="Script" id=10]
+[ext_resource path="res://src/Scenes/Player/Scripts/States/Normal.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 15.75 )
@@ -345,7 +347,8 @@ process_mode = 0
 wait_time = 0.48
 one_shot = true
 
-[node name="InvulnerabilityTimer" type="Timer" parent="."]
+[node name="InvTimer" type="Timer" parent="."]
+wait_time = 0.96
 
 [node name="PlayerStateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -368,7 +371,10 @@ script = ExtResource( 8 )
 
 [node name="StatusStateMachine" type="Node" parent="."]
 script = ExtResource( 9 )
+START_STATE = NodePath("Normal")
 
 [node name="Invulnerable" type="Node" parent="StatusStateMachine"]
+script = ExtResource( 10 )
 
 [node name="Normal" type="Node" parent="StatusStateMachine"]
+script = ExtResource( 11 )
