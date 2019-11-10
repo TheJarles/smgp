@@ -29,8 +29,9 @@ func enter():
 	current_gravity = GRAVITY
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	jump_start = owner.get_global_position().y
-	var animation_name = "Jump " + animation_flip
+	var animation_name = "Jump " + animation_flip if velocity.x != 0 else "Jump " + animation_flip + " Stationary"
 	animation_player.clear_queue()
+	animation_player.stop()
 	animation_player.play(animation_name)
 
 func jump_height(start = jump_start):
@@ -80,12 +81,17 @@ func update(delta):
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
 	owner.check_for_collision_damage()
+	
+	if velocity.x == 0 and animation_player.get_current_animation().begins_with("Jump") \
+	and animation_player.get_current_animation().find("Stationary") == -1 and !direction:
+		var animation_name = "Jump " + animation_flip + " Stationary"
+		seamless_transition(animation_name)
 
 	fall_distance = abs(jump_height(peak_height))
-	if fall_distance > 96 and velocity.y > 0:
-		if !animation_player.get_current_animation().begins_with("Fall"):
-			var animation_name = "Fall " + animation_flip
-			animation_player.play(animation_name)
+	if fall_distance > 96 and velocity.y > 0 \
+	and !animation_player.get_current_animation().begins_with("Fall"):
+		var animation_name = "Fall " + animation_flip
+		animation_player.play(animation_name)
 
 	if owner.is_on_floor():
 #		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
@@ -105,9 +111,7 @@ func update(delta):
 func _on_direction_changed(direction):
 	animation_flip = "Right" if direction == 1 else "Left"
 	var animation_name = animation_player.get_current_animation().split(" ", 1)[0] + " " + animation_flip
-	var pos = animation_player.get_current_animation_position()
-	animation_player.play(animation_name)
-	animation_player.advance(pos)
+	seamless_transition(animation_name)
 
 
 func _on_received_damage():

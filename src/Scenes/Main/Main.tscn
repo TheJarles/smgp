@@ -35,18 +35,24 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
-margin_right = 128.0
-margin_bottom = 128.0
+margin_right = 192.0
+margin_bottom = 192.0
 script = ExtResource( 5 )
 
 [node name="State" type="Label" parent="CanvasLayer/Panel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 119.0
-margin_bottom = 58.0
+margin_right = 185.0
+margin_bottom = 57.0
 
 [node name="Status" type="Label" parent="CanvasLayer/Panel"]
 margin_left = 7.0
 margin_top = 71.0
-margin_right = 121.0
-margin_bottom = 122.0
+margin_right = 185.0
+margin_bottom = 121.0
+
+[node name="Animation" type="Label" parent="CanvasLayer/Panel"]
+margin_left = 7.0
+margin_top = 135.0
+margin_right = 185.0
+margin_bottom = 185.0

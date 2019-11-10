@@ -12,7 +12,8 @@ var air_drag = 0.75
 func exit():
 	owner.get_node("BufferTimer").stop()
 	if fall_distance > 96:
-		var animation_name = "Land " + animation_flip
+		
+		var animation_name = "Land " + animation_flip if velocity.x != 0 else "Land " + animation_flip + " Stationary"
 		animation_player.play(animation_name)
 
 

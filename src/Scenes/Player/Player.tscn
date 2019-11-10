@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/Scenes/Player/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/animated_sprites/watson_move_set.png" type="Texture" id=2]
@@ -136,7 +136,23 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-resource_name = "Jump Right"
+resource_name = "Jump Left Stationary"
+length = 0.36
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 277, 278, 279, 280, 281, 282 ]
+}
+
+[sub_resource type="Animation" id=10]
 length = 0.36
 step = 0.03
 tracks/0/type = "value"
@@ -152,7 +168,24 @@ tracks/0/keys = {
 "values": [ 30, 31, 32, 33, 34, 35 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
+resource_name = "Jump Right Stationary"
+length = 0.36
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 270, 271, 272, 273, 274, 275 ]
+}
+
+[sub_resource type="Animation" id=12]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -168,8 +201,24 @@ tracks/0/keys = {
 "values": [ 67, 68, 69, 70, 71, 72 ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "Land Right"
+[sub_resource type="Animation" id=13]
+resource_name = "Land Left Stationary"
+length = 0.36
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 292, 293, 294, 295, 296, 297 ]
+}
+
+[sub_resource type="Animation" id=14]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -185,7 +234,24 @@ tracks/0/keys = {
 "values": [ 60, 61, 62, 63, 64, 65 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=15]
+resource_name = "Land Right Stationary"
+length = 0.36
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 285, 286, 287, 288, 289, 290 ]
+}
+
+[sub_resource type="Animation" id=16]
 length = 0.84
 loop = true
 step = 0.06
@@ -202,7 +268,7 @@ tracks/0/keys = {
 "values": [ 22, 23, 24, 25, 26, 27, 28, 15, 16, 17, 18, 19, 20, 21 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=17]
 length = 0.84
 loop = true
 step = 0.06
@@ -219,7 +285,7 @@ tracks/0/keys = {
 "values": [ 7, 8, 9, 10, 11, 12, 13, 0, 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=18]
 length = 0.18
 step = 0.18
 tracks/0/type = "value"
@@ -235,7 +301,7 @@ tracks/0/keys = {
 "values": [ 78 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=19]
 length = 0.18
 step = 0.18
 tracks/0/type = "value"
@@ -251,7 +317,7 @@ tracks/0/keys = {
 "values": [ 75 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=20]
 length = 0.18
 step = 0.12
 tracks/0/type = "value"
@@ -267,7 +333,7 @@ tracks/0/keys = {
 "values": [ 81, 82 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=21]
 length = 0.18
 step = 0.12
 tracks/0/type = "value"
@@ -283,8 +349,7 @@ tracks/0/keys = {
 "values": [ 84, 85 ]
 }
 
-[sub_resource type="Animation" id=18]
-resource_name = "Damage"
+[sub_resource type="Animation" id=22]
 length = 0.08
 loop = true
 tracks/0/type = "value"
@@ -308,9 +373,9 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-vframes = 18
+vframes = 20
 hframes = 15
-frame = 38
+frame = 182
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
@@ -324,18 +389,22 @@ shape = SubResource( 1 )
 "anims/Idle Up Left" = SubResource( 6 )
 "anims/Idle Up Right" = SubResource( 7 )
 "anims/Jump Left" = SubResource( 8 )
-"anims/Jump Right" = SubResource( 9 )
-"anims/Land Left" = SubResource( 10 )
-"anims/Land Right" = SubResource( 11 )
-"anims/Run Left" = SubResource( 12 )
-"anims/Run Right" = SubResource( 13 )
-"anims/Stagger Left" = SubResource( 14 )
-"anims/Stagger Right" = SubResource( 15 )
-"anims/Turn Left" = SubResource( 16 )
-"anims/Turn Right" = SubResource( 17 )
+"anims/Jump Left Stationary" = SubResource( 9 )
+"anims/Jump Right" = SubResource( 10 )
+"anims/Jump Right Stationary" = SubResource( 11 )
+"anims/Land Left" = SubResource( 12 )
+"anims/Land Left Stationary" = SubResource( 13 )
+"anims/Land Right" = SubResource( 14 )
+"anims/Land Right Stationary" = SubResource( 15 )
+"anims/Run Left" = SubResource( 16 )
+"anims/Run Right" = SubResource( 17 )
+"anims/Stagger Left" = SubResource( 18 )
+"anims/Stagger Right" = SubResource( 19 )
+"anims/Turn Left" = SubResource( 20 )
+"anims/Turn Right" = SubResource( 21 )
 
 [node name="EffectsPlayer" type="AnimationPlayer" parent="."]
-anims/Damage = SubResource( 18 )
+anims/Damage = SubResource( 22 )
 
 [node name="BufferTimer" type="Timer" parent="."]
 process_mode = 0

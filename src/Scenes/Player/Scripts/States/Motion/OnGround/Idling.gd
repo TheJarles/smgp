@@ -25,10 +25,6 @@ func handle_input(event):
 	else:
 		.handle_input(event)
 
-func seamless_transition(animation_name):
-	var pos = animation_player.get_current_animation_position()
-	animation_player.play(animation_name)
-	animation_player.advance(pos)
 
 func update(delta):
 	var input_direction = get_input_direction()

@@ -23,6 +23,12 @@ func get_input_direction():
 	return input_direction
 
 
+func seamless_transition(animation_name):
+	var pos = animation_player.get_current_animation_position()
+	animation_player.play(animation_name)
+	animation_player.advance(pos)
+
+
 func update_look_direction(direction):
 	if abs(direction - owner.look_direction) == 2:
 		owner.set_look_direction(direction)
