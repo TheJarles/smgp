@@ -12,7 +12,6 @@ func _ready():
 	owner.get_node("AnimationPlayer").connect("animation_finished", self, "_on_animation_finished")
 	owner.get_node("AnimationPlayer").set_animation_process_mode(0)
 	owner.get_node("BufferTimer").connect("timeout", self, "_on_timed_out")
-	owner.get_node("StaggerTimer").connect("timeout", self, "_on_stagger_timed_out")
 
 
 func _change_state(state_name):
@@ -32,11 +31,6 @@ func _on_direction_changed(direction):
 func _on_timed_out():
 	if current_state in [$Falling, $Jumping, $Staggering]:
 		current_state._on_timed_out()
-
-
-func _on_stagger_timed_out():
-	if current_state == $Staggering:
-		current_state._on_stagger_timed_out()
 
 
 func _on_received_damage():
