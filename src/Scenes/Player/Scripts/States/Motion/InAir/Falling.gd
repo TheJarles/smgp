@@ -1,7 +1,7 @@
 extends "./InAir.gd"
 
 onready var coyote_timer = owner.get_node("CoyoteTimer")
-onready var buffer_timer = owner.get_node("BufferTimer")
+
 
 var fall_start = 0
 var coyote_time = true
@@ -9,6 +9,7 @@ var pre_fall = 0
 
 func _ready():
 	coyote_timer.connect("timeout", self, "_on_coyote_timed_out")
+	momentum_timer.connect("timeout", self, "_on_momentum_timed_out")
 
 func enter():
 	damage = false
@@ -17,6 +18,7 @@ func enter():
 	velocity = enter_velocity
 	coyote_time = true
 	buffer_jump = false
+	momentum_buffer = true if enter_velocity.x != 0 else false
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	animation_player.clear_queue()
 	coyote_timer.start()
@@ -37,6 +39,7 @@ func handle_input(event):
 func update(delta):
 	var direction = get_input_direction()
 	if direction:
+		momentum_buffer = true
 		update_look_direction(direction)
 		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * air_drag * direction),
 				-HORIZONTAL_SPEED, HORIZONTAL_SPEED)
@@ -44,6 +47,10 @@ func update(delta):
 		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION * air_drag), 0)
 	else:
 		velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
+	
+	if !direction and momentum_timer.get_time_left() == 0:
+		momentum_timer.start()
+	
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = min(velocity.y + (GRAVITY * HIGH_GRAVITY), TERMINAL_VELOCITY)
 	owner.check_for_collision_damage()
@@ -86,3 +93,7 @@ func _on_coyote_timed_out():
 
 func _on_received_damage():
 	return ._on_received_damage()
+
+
+func _on_momentum_timed_out():
+	momentum_buffer = false

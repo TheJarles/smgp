@@ -5,8 +5,6 @@ const MINIMUM_HEIGHT = 96
 
 export(float) var JUMP_VELOCITY = -1171
 
-onready var delay_timer = owner.get_node("BufferTimer")
-
 var jump_start = 0
 var peak_height = 0
 var horizontal_start = 0
@@ -14,6 +12,11 @@ var current_gravity = 0
 var jump_released = false
 var jump_stopped = false
 var gravity_reset = false
+
+
+func _ready():
+	momentum_timer.connect("timeout", self, "_on_momentum_timed_out")
+
 
 func enter():
 	damage = false
@@ -29,6 +32,7 @@ func enter():
 	current_gravity = GRAVITY
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	jump_start = owner.get_global_position().y
+	momentum_buffer = true if velocity.x != 0 else false
 	var animation_name = "Jump " + animation_flip if velocity.x != 0 else "Jump " + animation_flip + " Stationary"
 	animation_player.clear_queue()
 	animation_player.stop()
@@ -51,7 +55,7 @@ func handle_input(event):
 			stop_jump()
 	elif event.is_action_pressed("jump"):
 		buffer_jump = true
-		delay_timer.start()
+		buffer_timer.start()
 	else:
 		.handle_input(event)
 
@@ -60,6 +64,7 @@ func update(delta):
 
 	var direction = get_input_direction()
 	if direction:
+		momentum_buffer = true
 		update_look_direction(direction)
 		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * air_drag * direction),
 				-HORIZONTAL_SPEED, HORIZONTAL_SPEED)
@@ -67,6 +72,9 @@ func update(delta):
 		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION * air_drag), 0)
 	else:
 		velocity.x = min(velocity.x + (HORIZONTAL_ACCELERATION * air_drag), 0)
+
+	if !direction and momentum_timer.get_time_left() == 0:
+		momentum_timer.start()
 
 	if jump_height() < 0:
 		current_gravity = GRAVITY * HIGH_GRAVITY
@@ -99,7 +107,7 @@ func update(delta):
 		if damage:
 			emit_signal("finished", "staggering")
 		elif buffer_jump:
-			delay_timer.stop()
+			buffer_timer.stop()
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 			emit_signal("finished", "running")
@@ -116,3 +124,7 @@ func _on_direction_changed(direction):
 
 func _on_received_damage():
 	return ._on_received_damage()
+
+
+func _on_momentum_timed_out():
+	momentum_buffer = false

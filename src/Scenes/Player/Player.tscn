@@ -417,11 +417,18 @@ wait_time = 0.48
 one_shot = true
 
 [node name="CoyoteTimer" type="Timer" parent="."]
+process_mode = 0
 wait_time = 0.07
 one_shot = true
 
 [node name="InvTimer" type="Timer" parent="."]
+process_mode = 0
 wait_time = 0.96
+
+[node name="MomentumTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.12
+one_shot = true
 
 [node name="PlayerStateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
