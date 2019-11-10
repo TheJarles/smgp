@@ -2,8 +2,12 @@ extends Panel
 
 
 func _ready():
-	owner.get_node("Player").get_node("PlayerStateMachine").connect("state_changed", self, "_on_player_state_changed")
-	owner.get_node("Player").get_node("StatusStateMachine").connect("state_changed", self, "_on_status_state_changed")
+	var player_state_machine = owner.get_node("Player").get_node("PlayerStateMachine")
+	var status_state_machine = owner.get_node("Player").get_node("StatusStateMachine")
+	player_state_machine.connect("state_changed", self, "_on_player_state_changed")
+	status_state_machine.connect("state_changed", self, "_on_status_state_changed")
+	$State.text = "State: " + player_state_machine.current_state.get_name()
+	$Status.text = "Status: " + status_state_machine.current_state.get_name()
 
 func _on_player_state_changed(current_state):
 	$State.text = "State: " + current_state.get_name()

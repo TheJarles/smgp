@@ -13,7 +13,7 @@
 [ext_resource path="res://src/Scenes/Player/Scripts/States/Normal.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.5, 15.75 )
+extents = Vector2( 6.5, 14 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Fall Left"
@@ -138,7 +138,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=9]
 resource_name = "Jump Right"
 length = 0.36
-step = 0.06
+step = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -285,7 +285,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=18]
 resource_name = "Damage"
-length = 0.12
+length = 0.08
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -294,7 +294,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06 ),
+"times": PoolRealArray( 0, 0.04 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -310,10 +310,10 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 18
 hframes = 15
-frame = 90
+frame = 38
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1.25 )
+position = Vector2( 0, 3 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -339,12 +339,16 @@ anims/Damage = SubResource( 18 )
 
 [node name="BufferTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.07
+wait_time = 0.1
 one_shot = true
 
 [node name="StaggerTimer" type="Timer" parent="."]
 process_mode = 0
 wait_time = 0.48
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.07
 one_shot = true
 
 [node name="InvTimer" type="Timer" parent="."]

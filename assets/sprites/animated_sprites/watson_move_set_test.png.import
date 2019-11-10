@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/watson_move_set_old.png-74a273d8e5bb17a153e77543ec3218c5.stex"
+path="res://.import/watson_move_set_test.png-b759cbc6b898df6643e401f979707ffd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/animated_sprites/watson_move_set_old.png"
-dest_files=[ "res://.import/watson_move_set_old.png-74a273d8e5bb17a153e77543ec3218c5.stex" ]
+source_file="res://assets/sprites/animated_sprites/watson_move_set_test.png"
+dest_files=[ "res://.import/watson_move_set_test.png-b759cbc6b898df6643e401f979707ffd.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

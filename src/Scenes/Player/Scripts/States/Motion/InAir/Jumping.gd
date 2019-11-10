@@ -40,7 +40,6 @@ func stop_jump():
 	velocity.y = 0
 	peak_height = owner.get_global_position().y
 	current_gravity = GRAVITY * clamp((HIGH_GRAVITY * jump_height() / JUMP_HEIGHT), 1, 1.75)
-#	print(GRAVITY, " ", current_gravity, " ", GRAVITY * HIGH_GRAVITY)
 	jump_stopped = true
 
 
@@ -61,12 +60,12 @@ func update(delta):
 	var direction = get_input_direction()
 	if direction:
 		update_look_direction(direction)
-		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * direction),
+		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * air_drag * direction),
 				-HORIZONTAL_SPEED, HORIZONTAL_SPEED)
 	elif owner.look_direction == 1:
-		velocity.x = max(velocity.x - HORIZONTAL_ACCELERATION, 0)
+		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION * air_drag), 0)
 	else:
-		velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
+		velocity.x = min(velocity.x + (HORIZONTAL_ACCELERATION * air_drag), 0)
 
 	if jump_height() < 0:
 		current_gravity = GRAVITY * HIGH_GRAVITY
@@ -92,7 +91,6 @@ func update(delta):
 #		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
 #		print("Vertical Distance at Peak: ", (abs(owner.get_global_position().y - peak_height)))
 		if damage:
-			print("ouch")
 			emit_signal("finished", "staggering")
 		elif buffer_jump:
 			delay_timer.stop()
@@ -106,7 +104,7 @@ func update(delta):
 
 func _on_direction_changed(direction):
 	animation_flip = "Right" if direction == 1 else "Left"
-	var animation_name = ("Fall " if velocity.y > 0 else "Jump ") + animation_flip
+	var animation_name = animation_player.get_current_animation().split(" ", 1)[0] + " " + animation_flip
 	var pos = animation_player.get_current_animation_position()
 	animation_player.play(animation_name)
 	animation_player.advance(pos)

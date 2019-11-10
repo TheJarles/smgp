@@ -6,6 +6,7 @@ export(float) var HIGH_GRAVITY = 1.75
 var fall_distance = 0
 var buffer_jump = false
 var damage = false
+var air_drag = 0.75
 
 
 func exit():
