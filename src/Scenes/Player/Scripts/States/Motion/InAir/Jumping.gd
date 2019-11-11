@@ -1,7 +1,6 @@
 extends "./InAir.gd"
 
-const JUMP_HEIGHT = 200
-const MINIMUM_HEIGHT = 96
+const JUMP_HEIGHT = 215
 
 export(float) var JUMP_VELOCITY = -1171
 
@@ -83,8 +82,12 @@ func update(delta):
 		stop_jump()
 
 	if velocity.y >= 0 and !jump_stopped:
-		peak_height = owner.get_global_position().y if !peak_height else peak_height
-		current_gravity = GRAVITY * HIGH_GRAVITY
+		if jump_height() <= JUMP_HEIGHT and !peak_height:
+			print("Bonk!")
+			stop_jump()
+		else:
+			peak_height = owner.get_global_position().y if !peak_height else peak_height
+			current_gravity = GRAVITY * HIGH_GRAVITY
 
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
@@ -96,14 +99,14 @@ func update(delta):
 		seamless_transition(animation_name)
 
 	fall_distance = abs(jump_height(peak_height))
-	if fall_distance > 96 and velocity.y > 0 \
+	if fall_distance > MINIMUM_HEIGHT and velocity.y > 0 \
 	and !animation_player.get_current_animation().begins_with("Fall"):
 		var animation_name = "Fall " + animation_flip
 		animation_player.play(animation_name)
 
 	if owner.is_on_floor():
-#		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
-#		print("Vertical Distance at Peak: ", (abs(owner.get_global_position().y - peak_height)))
+		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
+		print("Vertical Distance at Peak: ", (abs(owner.get_global_position().y - peak_height)))
 		if damage:
 			emit_signal("finished", "staggering")
 		elif buffer_jump:

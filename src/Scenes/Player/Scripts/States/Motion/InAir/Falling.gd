@@ -55,7 +55,7 @@ func update(delta):
 	velocity.y = min(velocity.y + (GRAVITY * HIGH_GRAVITY), TERMINAL_VELOCITY)
 	owner.check_for_collision_damage()
 	fall_distance = abs(fall_start - owner.get_global_position().y)
-	if fall_distance > 96 and !animation_player.get_current_animation().begins_with("Fall "):
+	if fall_distance > MINIMUM_HEIGHT and !animation_player.get_current_animation().begins_with("Fall "):
 		var animation_name = "Fall " + animation_flip
 		animation_player.play(animation_name)
 	if owner.is_on_floor():
