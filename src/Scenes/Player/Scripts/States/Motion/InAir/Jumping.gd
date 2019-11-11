@@ -1,6 +1,6 @@
 extends "./InAir.gd"
 
-const JUMP_HEIGHT = 215
+const JUMP_HEIGHT = 218
 
 export(float) var JUMP_VELOCITY = -1171
 
@@ -19,13 +19,12 @@ func _ready():
 
 func enter():
 	damage = false
-	jump_released = false
+	jump_released = false if Input.is_action_pressed("jump") else true
 	jump_stopped = false
 	buffer_jump = false
 	fall_distance = 0
 	peak_height = 0
 	horizontal_start = owner.get_global_position().x
-#	gravity_reset = false
 	velocity = enter_velocity
 	velocity.y = JUMP_VELOCITY + GRAVITY
 	current_gravity = GRAVITY
@@ -41,9 +40,10 @@ func jump_height(start = jump_start):
 	return start - owner.get_global_position().y
 
 func stop_jump():
-	velocity.y = 0
-	peak_height = owner.get_global_position().y
-	current_gravity = GRAVITY * clamp((HIGH_GRAVITY * jump_height() / JUMP_HEIGHT), 1, 1.75)
+	velocity.y /= 2
+	print(velocity.y)
+#	current_gravity = GRAVITY * clamp((HIGH_GRAVITY * jump_height() / JUMP_HEIGHT), 1, 1.75)
+	current_gravity = GRAVITY * HIGH_GRAVITY
 	jump_stopped = true
 
 
@@ -61,6 +61,7 @@ func handle_input(event):
 
 func update(delta):
 
+	# Code for handling horizontal acceleration
 	var direction = get_input_direction()
 	if direction:
 		momentum_buffer = true
@@ -75,19 +76,19 @@ func update(delta):
 	if !direction and momentum_timer.get_time_left() == 0:
 		momentum_timer.start()
 
+	# If player is below the starting point of the jump, set gravity to high gravity
 	if jump_height() < 0:
 		current_gravity = GRAVITY * HIGH_GRAVITY
 
+	# If player has released the jump button and the jump hasn't been stopped, stop the jump
 	if jump_height() >= MINIMUM_HEIGHT and jump_released and !jump_stopped:
 		stop_jump()
 
-	if velocity.y >= 0 and !jump_stopped:
-		if jump_height() <= JUMP_HEIGHT and !peak_height:
-			print("Bonk!")
-			stop_jump()
-		else:
-			peak_height = owner.get_global_position().y if !peak_height else peak_height
-			current_gravity = GRAVITY * HIGH_GRAVITY
+	
+	if velocity.y >= 0 and !peak_height:
+		#TODO: make bonks feel a bit less abrupt
+		peak_height = owner.get_global_position().y if !peak_height else peak_height
+		current_gravity = GRAVITY * HIGH_GRAVITY
 
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
@@ -106,7 +107,7 @@ func update(delta):
 
 	if owner.is_on_floor():
 		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
-		print("Vertical Distance at Peak: ", (abs(owner.get_global_position().y - peak_height)))
+		print("Vertical Distance at Peak: ", abs(jump_height(peak_height)))
 		if damage:
 			emit_signal("finished", "staggering")
 		elif buffer_jump:

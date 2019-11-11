@@ -1,6 +1,6 @@
 extends "../Motion.gd"
 
-const MINIMUM_HEIGHT = 96
+const MINIMUM_HEIGHT = 70
 
 export(float) var TERMINAL_VELOCITY = 48 * 100
 export(float) var HIGH_GRAVITY = 1.75
