@@ -28,7 +28,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 52, 53, 54, 55, 56, 57 ]
 }
 
@@ -129,7 +129,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 37, 38, 39, 40, 41, 42 ]
 }
 
@@ -193,7 +193,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 67, 68, 69, 70, 71, 72 ]
 }
 
@@ -291,7 +291,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ 78 ]
 }
 
@@ -307,7 +307,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ 75 ]
 }
 
@@ -323,7 +323,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.12 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 81, 82 ]
 }
 
@@ -339,7 +339,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.12 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 84, 85 ]
 }
 
@@ -369,7 +369,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 15
-frame = 34
+frame = 78
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
