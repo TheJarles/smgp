@@ -2,7 +2,7 @@ extends "./InAir.gd"
 
 const JUMP_HEIGHT = 218
 
-export(float) var JUMP_VELOCITY = -1171
+export(float) var JUMP_VELOCITY = -1135
 
 var jump_start = 0
 var peak_height = 0
@@ -86,9 +86,9 @@ func update(delta):
 
 	
 	if velocity.y >= 0 and !peak_height:
-		#TODO: make bonks feel a bit less abrupt
-		peak_height = owner.get_global_position().y if !peak_height else peak_height
+		peak_height = owner.get_global_position().y
 		current_gravity = GRAVITY * HIGH_GRAVITY
+		animation_player.seek(animation_player.current_animation_length)
 
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)

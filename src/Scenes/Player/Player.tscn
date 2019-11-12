@@ -369,7 +369,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 15
-frame = 78
+frame = 90
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
@@ -412,7 +412,7 @@ one_shot = true
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.07
+wait_time = 0.05
 one_shot = true
 
 [node name="InvTimer" type="Timer" parent="."]

@@ -1,9 +1,9 @@
 extends "../Motion.gd"
 
-const MINIMUM_HEIGHT = 70
+const MINIMUM_HEIGHT = 96
 
 export(float) var TERMINAL_VELOCITY = 48 * 100
-export(float) var HIGH_GRAVITY = 1.75
+export(float) var HIGH_GRAVITY = 1.5
 
 onready var buffer_timer = owner.get_node("BufferTimer")
 onready var momentum_timer = owner.get_node("MomentumTimer")
