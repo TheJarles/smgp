@@ -22,6 +22,9 @@ func enter():
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	animation_player.clear_queue()
 	coyote_timer.start()
+	var animation_name = "Jump " + animation_flip
+	animation_player.play(animation_name)
+	animation_player.advance(0.241)
 
 
 func handle_input(event):
@@ -85,10 +88,6 @@ func _on_direction_changed(direction):
 
 func _on_coyote_timed_out():
 	coyote_time = false
-	var animation_name = "Jump " + animation_flip
-	animation_player.play(animation_name)
-	animation_player.advance(animation_player.current_animation_length)
-	animation_player.stop()
 
 
 func _on_received_damage():

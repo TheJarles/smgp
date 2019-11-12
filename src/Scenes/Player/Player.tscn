@@ -16,7 +16,6 @@
 extents = Vector2( 6.5, 14 )
 
 [sub_resource type="Animation" id=2]
-resource_name = "Fall Left"
 length = 0.36
 loop = true
 step = 0.06
@@ -34,7 +33,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "Fall Right"
 length = 0.36
 loop = true
 step = 0.06
@@ -136,7 +134,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-resource_name = "Jump Left Stationary"
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -169,7 +166,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=11]
-resource_name = "Jump Right Stationary"
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -202,7 +198,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=13]
-resource_name = "Land Left Stationary"
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -235,7 +230,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=15]
-resource_name = "Land Right Stationary"
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -375,7 +369,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 15
-frame = 182
+frame = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
