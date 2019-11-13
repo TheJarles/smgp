@@ -36,9 +36,9 @@ func update(delta):
 		emit_signal("finished", "running")
 	else:
 		if owner.look_direction == 1:
-			velocity.x = max(velocity.x - HORIZONTAL_ACCELERATION, 0)
+			velocity.x = max(velocity.x - HORIZONTAL_DECELERATION, 0)
 		else:
-			velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
+			velocity.x = min(velocity.x + HORIZONTAL_DECELERATION, 0)
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = GRAVITY
 	owner.check_for_collision_damage()

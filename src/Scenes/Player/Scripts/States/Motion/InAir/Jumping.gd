@@ -1,7 +1,7 @@
 extends "./InAir.gd"
 
 
-export(float) var JUMP_VELOCITY = -1185
+export(float) var JUMP_VELOCITY = -1200
 
 var jump_start = 0
 var peak_height = 0
@@ -9,7 +9,7 @@ var horizontal_start = 0
 var current_gravity = 0
 var jump_released = false
 var jump_stopped = false
-var gravity_reset = false
+var bonked = false
 var previous_velocity = Vector2()
 var hang_time = 0
 
@@ -23,6 +23,7 @@ func enter():
 	jump_released = false if Input.is_action_pressed("jump") else true
 	jump_stopped = false
 	buffer_jump = false
+	bonked = false
 	fall_distance = 0
 	peak_height = 0
 	hang_time = 0
@@ -71,9 +72,9 @@ func update(delta):
 		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * air_drag * direction),
 				-HORIZONTAL_SPEED, HORIZONTAL_SPEED)
 	elif owner.look_direction == 1:
-		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION * air_drag), 0)
+		velocity.x = max(velocity.x - (HORIZONTAL_DECELERATION * air_drag), 0)
 	else:
-		velocity.x = min(velocity.x + (HORIZONTAL_ACCELERATION * air_drag), 0)
+		velocity.x = min(velocity.x + (HORIZONTAL_DECELERATION * air_drag), 0)
 
 	if !direction and momentum_timer.get_time_left() == 0:
 		momentum_timer.start()
@@ -89,15 +90,21 @@ func update(delta):
 	if velocity.y >= 0 and !peak_height:
 		peak_height = owner.get_global_position().y
 		current_gravity = GRAVITY * HIGH_GRAVITY
-		animation_player.seek(animation_player.current_animation_length)
+		var animation_name = "Fall Start " + animation_flip
+		animation_player.play(animation_name)
 
 	previous_velocity = velocity
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	for slide in owner.get_slide_count():
-		if owner.get_slide_collision(slide).normal.y == 1 and !hang_time:
+		if owner.get_slide_collision(slide).normal.y == 1 and !bonked:
+			bonked = true
+			peak_height = owner.get_global_position().y
 			hang_time = ceil(abs((previous_velocity.y + GRAVITY) / (4 * GRAVITY * HIGH_GRAVITY))) + 1
 	if hang_time:
-		velocity.y = 0
+		if !animation_player.get_current_animation().begins_with("Fall"):
+			var animation_name = "Fall Start " + animation_flip
+			animation_player.play(animation_name)
+		velocity.y = -1
 		hang_time -= 1
 	else:
 		velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
@@ -110,7 +117,7 @@ func update(delta):
 
 	fall_distance = abs(jump_height(peak_height)) if peak_height else 0
 	if fall_distance >= MINIMUM_HEIGHT and velocity.y > 0 \
-	and !animation_player.get_current_animation().begins_with("Fall"):
+	and !(animation_player.get_current_animation() in ["Fall Right", "Fall Left"]):
 		var animation_name = "Fall " + animation_flip
 		animation_player.play(animation_name)
 
@@ -125,12 +132,13 @@ func update(delta):
 			emit_signal("finished", "running")
 		else:
 			emit_signal("finished", "idling")
-		
+
 
 
 func _on_direction_changed(direction):
 	animation_flip = "Right" if direction == 1 else "Left"
-	var animation_name = animation_player.get_current_animation().split(" ", 1)[0] + " " + animation_flip
+	var animation_name = animation_player.get_assigned_animation().replace("Left", animation_flip) \
+		if direction == 1 else animation_player.get_assigned_animation().replace("Right", animation_flip)
 	seamless_transition(animation_name)
 
 
@@ -144,3 +152,4 @@ func _on_momentum_timed_out():
 
 func exit():
 	momentum_timer.stop()
+	.exit()

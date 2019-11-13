@@ -2,9 +2,10 @@ extends "../State.gd"
 
 const FLOOR = Vector2(0, -1)
 
-export(float) var HORIZONTAL_SPEED = 400 # 407 for 150 pixel dist short jump 386.4 for 264 pixel long jump
-export(float) var HORIZONTAL_ACCELERATION = HORIZONTAL_SPEED / 3
-export(float) var GRAVITY = 50
+export(float) var HORIZONTAL_SPEED = 375
+export(float) var HORIZONTAL_ACCELERATION = HORIZONTAL_SPEED / 6
+export(float) var HORIZONTAL_DECELERATION = HORIZONTAL_SPEED / 4
+export(float) var GRAVITY = 65
 
 var enter_velocity = Vector2()
 var velocity = Vector2()

@@ -48,9 +48,9 @@ func update(delta):
 		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * air_drag * direction),
 				-HORIZONTAL_SPEED, HORIZONTAL_SPEED)
 	elif owner.look_direction == 1:
-		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION * air_drag), 0)
+		velocity.x = max(velocity.x - (HORIZONTAL_DECELERATION * air_drag), 0)
 	else:
-		velocity.x = min(velocity.x + HORIZONTAL_ACCELERATION, 0)
+		velocity.x = min(velocity.x + HORIZONTAL_DECELERATION, 0)
 	
 	if !direction and momentum_timer.get_time_left() == 0:
 		momentum_timer.start()
