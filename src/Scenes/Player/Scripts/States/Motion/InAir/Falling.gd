@@ -25,6 +25,7 @@ func enter():
 	var animation_name = "Jump " + animation_flip
 	animation_player.play(animation_name)
 	animation_player.advance(0.241)
+	.enter()
 
 
 func handle_input(event):
@@ -65,7 +66,6 @@ func update(delta):
 		if damage:
 			emit_signal("finished", "staggering")
 		elif buffer_jump:
-			buffer_timer.stop()
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 			emit_signal("finished", "running")
@@ -76,6 +76,7 @@ func update(delta):
 func exit():
 	pre_fall = 0
 	coyote_timer.stop()
+	momentum_timer.stop()
 	.exit()
 
 

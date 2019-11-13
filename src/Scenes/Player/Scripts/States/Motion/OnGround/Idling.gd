@@ -11,6 +11,7 @@ func enter():
 		animation_player.play(animation_name)
 	velocity = enter_velocity
 	velocity.y = GRAVITY
+	.enter()
 
 func handle_input(event):
 	var animation_name = "Idle "

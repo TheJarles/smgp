@@ -13,6 +13,7 @@ func enter():
 	elif current_animation:
 		animation_player.clear_queue()
 		animation_player.play(animation_name)
+	.enter()
 
 
 func handle_input(event):
@@ -46,3 +47,4 @@ func _on_direction_changed(direction):
 
 func _on_received_damage():
 	emit_signal("finished", "staggering")
+

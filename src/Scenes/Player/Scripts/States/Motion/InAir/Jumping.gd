@@ -1,8 +1,7 @@
 extends "./InAir.gd"
 
-const JUMP_HEIGHT = 218
 
-export(float) var JUMP_VELOCITY = -1135
+export(float) var JUMP_VELOCITY = -1185
 
 var jump_start = 0
 var peak_height = 0
@@ -11,6 +10,8 @@ var current_gravity = 0
 var jump_released = false
 var jump_stopped = false
 var gravity_reset = false
+var previous_velocity = Vector2()
+var hang_time = 0
 
 
 func _ready():
@@ -24,9 +25,11 @@ func enter():
 	buffer_jump = false
 	fall_distance = 0
 	peak_height = 0
+	hang_time = 0
 	horizontal_start = owner.get_global_position().x
 	velocity = enter_velocity
-	velocity.y = JUMP_VELOCITY + GRAVITY
+	velocity.y = JUMP_VELOCITY
+	previous_velocity = velocity
 	current_gravity = GRAVITY
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	jump_start = owner.get_global_position().y
@@ -35,14 +38,13 @@ func enter():
 	animation_player.clear_queue()
 	animation_player.stop()
 	animation_player.play(animation_name)
+	.enter()
 
 func jump_height(start = jump_start):
 	return start - owner.get_global_position().y
 
 func stop_jump():
 	velocity.y /= 2
-	print(velocity.y)
-#	current_gravity = GRAVITY * clamp((HIGH_GRAVITY * jump_height() / JUMP_HEIGHT), 1, 1.75)
 	current_gravity = GRAVITY * HIGH_GRAVITY
 	jump_stopped = true
 
@@ -84,14 +86,21 @@ func update(delta):
 	if jump_height() >= MINIMUM_HEIGHT and jump_released and !jump_stopped:
 		stop_jump()
 
-	
 	if velocity.y >= 0 and !peak_height:
 		peak_height = owner.get_global_position().y
 		current_gravity = GRAVITY * HIGH_GRAVITY
 		animation_player.seek(animation_player.current_animation_length)
 
+	previous_velocity = velocity
 	velocity = owner.move_and_slide(velocity, FLOOR)
-	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
+	for slide in owner.get_slide_count():
+		if owner.get_slide_collision(slide).normal.y == 1 and !hang_time:
+			hang_time = ceil(abs((previous_velocity.y + GRAVITY) / (4 * GRAVITY * HIGH_GRAVITY))) + 1
+	if hang_time:
+		velocity.y = 0
+		hang_time -= 1
+	else:
+		velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
 	owner.check_for_collision_damage()
 	
 	if velocity.x == 0 and animation_player.get_current_animation().begins_with("Jump") \
@@ -99,19 +108,18 @@ func update(delta):
 		var animation_name = "Jump " + animation_flip + " Stationary"
 		seamless_transition(animation_name)
 
-	fall_distance = abs(jump_height(peak_height))
-	if fall_distance > MINIMUM_HEIGHT and velocity.y > 0 \
+	fall_distance = abs(jump_height(peak_height)) if peak_height else 0
+	if fall_distance >= MINIMUM_HEIGHT and velocity.y > 0 \
 	and !animation_player.get_current_animation().begins_with("Fall"):
 		var animation_name = "Fall " + animation_flip
 		animation_player.play(animation_name)
 
 	if owner.is_on_floor():
-		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
-		print("Vertical Distance at Peak: ", abs(jump_height(peak_height)))
+#		print("Horizontal Distance: ", (owner.get_global_position().x - horizontal_start))
+#		print("Vertical Distance at Peak: ", abs(jump_height(peak_height)))
 		if damage:
 			emit_signal("finished", "staggering")
 		elif buffer_jump:
-			buffer_timer.stop()
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 			emit_signal("finished", "running")
@@ -132,3 +140,7 @@ func _on_received_damage():
 
 func _on_momentum_timed_out():
 	momentum_buffer = false
+
+
+func exit():
+	momentum_timer.stop()

@@ -12,11 +12,14 @@ func _ready():
 	$Status.text = "Status: " + status_state_machine.current_state.get_name()
 	$Animation.text = "Animation: " + animation_player.get_current_animation()
 
+
 func _on_player_state_changed(current_state):
 	$State.text = "State: " + current_state.get_name()
 
+
 func _on_status_state_changed(current_state):
 	$Status.text = "Status: " + current_state.get_name()
+
 
 func _on_animation_started(animation):
 	$Animation.text = "Animation: " + animation

@@ -25,6 +25,8 @@ func enter():
 	var animation_name = "Stagger " + animation_flip
 	animation_player.play(animation_name)
 	stagger_timer.start()
+	owner.get_node("JumpingHitbox").set_disabled(true)
+	owner.get_node("StandingHitbox").set_disabled(false)
 
 
 func handle_input(event):
@@ -45,7 +47,7 @@ func update(delta):
 
 func exit():
 	stagger_timer.stop()
-	buffer_timer.stop()
+	.exit()
 
 
 func _on_timed_out():

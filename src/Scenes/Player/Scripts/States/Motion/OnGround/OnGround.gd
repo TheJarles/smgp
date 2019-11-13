@@ -1,6 +1,11 @@
 extends "../Motion.gd"
 
 
+func enter():
+	owner.get_node("JumpingHitbox").set_disabled(true)
+	owner.get_node("StandingHitbox").set_disabled(false)
+
+
 func handle_input(event):
 	if event.is_action_pressed("jump"):
 		emit_signal("finished", "jumping")
