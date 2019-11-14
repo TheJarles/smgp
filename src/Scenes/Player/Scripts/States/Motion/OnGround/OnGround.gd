@@ -8,7 +8,11 @@ func enter():
 
 func handle_input(event):
 	if event.is_action_pressed("jump"):
-		emit_signal("finished", "jumping")
+		if !animation_player.get_current_animation().begins_with("Slam") or \
+		animation_player.get_current_animation_position() > 0.42:
+			emit_signal("finished", "jumping")
+		else:
+			owner.get_node("BufferTimer").start()
 
 
 func update(delta):
@@ -23,3 +27,9 @@ func _on_direction_changed(direction):
 	else:
 		animation_flip = "Left"
 		animation_player.play("Turn Left")
+
+
+func _on_timed_out():
+	if !animation_player.get_current_animation().begins_with("Slam") or \
+		animation_player.get_current_animation_position() > 0.42:
+		emit_signal("finished", "jumping")

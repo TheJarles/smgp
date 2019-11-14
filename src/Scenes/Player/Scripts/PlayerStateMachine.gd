@@ -30,8 +30,7 @@ func _on_direction_changed(direction):
 
 
 func _on_timed_out():
-	if current_state in [$Falling, $Jumping, $Staggering]:
-		current_state._on_timed_out()
+	current_state._on_timed_out()
 
 
 func _on_received_damage():

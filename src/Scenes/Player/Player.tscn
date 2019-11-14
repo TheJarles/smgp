@@ -475,7 +475,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 23
 hframes = 15
-frame = 335
+frame = 336
 
 [node name="StandingHitbox" type="CollisionShape2D" parent="."]
 visible = false

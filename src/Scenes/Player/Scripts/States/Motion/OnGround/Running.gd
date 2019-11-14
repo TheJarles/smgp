@@ -16,14 +16,7 @@ func enter():
 	.enter()
 
 
-func handle_input(event):
-	return .handle_input(event)
-
-
 func update(delta):
-#	if !animation_player.get_current_animation():
-#		var animation_name = "Run " + animation_flip
-#		animation_player.play(animation_name)
 	var direction = get_input_direction()
 	if direction != 0:
 		if !animation_player.get_current_animation().begins_with("Slam"):
@@ -47,10 +40,5 @@ func _on_animation_finished(animation):
 	animation_player.play(animation_name)
 
 
-func _on_direction_changed(direction):
-	return ._on_direction_changed(direction)
-
-
 func _on_received_damage():
 	emit_signal("finished", "staggering")
-

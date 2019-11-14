@@ -14,24 +14,26 @@ func enter():
 	.enter()
 
 func handle_input(event):
-	var animation_name = "Idle "
-	var pos = animation_player.get_current_animation_position()
-
-	if event.is_action_pressed("up"):
-		animation_name += "Up " + animation_flip
-		if animation_player.get_current_animation().find("Up") == -1:
-			seamless_transition(animation_name)
-	elif event.is_action_released("up"):
-		animation_name += animation_flip
-		if animation_player.get_current_animation().find("Up") != -1:
-			seamless_transition(animation_name)
-	else:
-		.handle_input(event)
+	if !animation_player.get_current_animation().begins_with("Slam"):
+		var animation_name = "Idle "
+		var pos = animation_player.get_current_animation_position()
+	
+		if event.is_action_pressed("up"):
+			animation_name += "Up " + animation_flip
+			if animation_player.get_current_animation().find("Up") == -1:
+				seamless_transition(animation_name)
+		elif event.is_action_released("up"):
+			animation_name += animation_flip
+			if animation_player.get_current_animation().find("Up") != -1:
+				seamless_transition(animation_name)
+		else:
+			.handle_input(event)
+	.handle_input(event)
 
 
 func update(delta):
 	var input_direction = get_input_direction()
-	if input_direction:
+	if input_direction and !animation_player.get_current_animation().begins_with("Slam"):
 		update_look_direction(input_direction)
 		emit_signal("finished", "running")
 	else:
@@ -43,10 +45,6 @@ func update(delta):
 	velocity.y = GRAVITY
 	owner.check_for_collision_damage()
 	.update(delta)
-
-
-func _on_direction_changed(direction):
-	return ._on_direction_changed(direction)
 
 
 func _on_received_damage():
