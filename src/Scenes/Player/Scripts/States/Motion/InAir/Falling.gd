@@ -65,7 +65,9 @@ func update(delta):
 	if owner.is_on_floor():
 		if damage:
 			emit_signal("finished", "staggering")
-		elif buffer_jump and fall_distance <= 400:
+		elif fall_distance > 400:
+			emit_signal("finished", "slamming")
+		elif buffer_jump:
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("down"):
 			emit_signal("finished", "crouching")

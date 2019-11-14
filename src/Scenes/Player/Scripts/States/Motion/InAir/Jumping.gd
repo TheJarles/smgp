@@ -126,13 +126,14 @@ func update(delta):
 #		print("Vertical Distance at Peak: ", abs(jump_height(peak_height)))
 		if damage:
 			emit_signal("finished", "staggering")
-		elif buffer_jump and fall_distance <= 400:
+		if fall_distance > 400:
+			emit_signal("finished", "slamming")
+		elif buffer_jump:
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("down"):
 			emit_signal("finished", "crouching")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 			emit_signal("finished", "running")
-		
 		else:
 			emit_signal("finished", "idling")
 
@@ -151,8 +152,3 @@ func _on_received_damage():
 
 func _on_momentum_timed_out():
 	momentum_buffer = false
-
-
-func exit():
-	momentum_timer.stop()
-	.exit()

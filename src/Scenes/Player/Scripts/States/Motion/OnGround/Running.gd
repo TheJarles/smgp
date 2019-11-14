@@ -7,7 +7,7 @@ func enter():
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	var current_animation = animation_player.get_current_animation()
 	var animation_name = "Run " + animation_flip
-	if current_animation.begins_with("Turn") or current_animation.begins_with("Slam") or current_animation.begins_with("Stand"):
+	if current_animation.begins_with("Turn"):
 		animation_player.clear_queue()
 		animation_player.queue(animation_name)
 	else:
@@ -19,14 +19,8 @@ func enter():
 func update(delta):
 	var direction = get_input_direction()
 	if direction != 0:
-		if !animation_player.get_current_animation().begins_with("Slam"):
-			update_look_direction(direction)
-			velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * direction), -HORIZONTAL_SPEED, HORIZONTAL_SPEED)
-		else:
-			if direction == 1:
-				velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION / 3), 0)
-			else:
-				velocity.x = min(velocity.x + (HORIZONTAL_ACCELERATION / 3), 0)
+		update_look_direction(direction)
+		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * direction), -HORIZONTAL_SPEED, HORIZONTAL_SPEED)
 		velocity = owner.move_and_slide(velocity, FLOOR)
 		velocity.y = GRAVITY
 		owner.check_for_collision_damage()

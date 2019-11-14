@@ -6,11 +6,9 @@ func enter():
 	var animation_name = "Crouch " + animation_flip
 	var current_animation = animation_player.get_current_animation()
 	var pos = animation_player.get_current_animation_position()
-	if current_animation.begins_with("Land") and pos <= 0.3 and pos > 0.06 or \
-	current_animation.begins_with("Slam") and pos > 0.36:
+	if current_animation.begins_with("Land") and pos <= 0.3 and pos > 0.06:
 		animation_name += " Low"
-		animation_player.play(animation_name)
-	elif !current_animation.begins_with("Slam"):
+	if !current_animation.begins_with("Crouch"):
 		animation_player.play(animation_name)
 	velocity = enter_velocity
 
@@ -34,13 +32,7 @@ func exit():
 
 func update(delta):
 	var direction = get_input_direction()
-	if !animation_player.get_current_animation().begins_with("Slam"):
-		update_look_direction(direction)
-	elif animation_player.get_current_animation_position() >= 0.36:
-		var animation_name = "Crouch " + animation_flip + " Low"
-		animation_player.play(animation_name)
-		animation_player.advance(0.01)
-
+	update_look_direction(direction)
 	if sign(enter_velocity.x) > 0:
 		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION / 3), 0)
 	elif sign(enter_velocity.x) < 0:
@@ -64,6 +56,10 @@ func _on_direction_changed(direction):
 			animation_player.play("Crouch Right Low")
 		else:
 			animation_player.play("Crouch Left Low")
+	else:
+		var animation_variant = "" if animation_player.get_current_animation().find("Low") == -1 else " Low"
+		var animation_name = "Crouch " + animation_flip + animation_variant
+		seamless_transition(animation_name)
 
 
 func _on_animation_finished(animation):
