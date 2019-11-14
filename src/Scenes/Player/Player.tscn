@@ -667,6 +667,8 @@ script = ExtResource( 8 )
 [node name="Crouching" type="Node" parent="PlayerStateMachine"]
 script = ExtResource( 9 )
 
+[node name="Slamming" type="Node" parent="PlayerStateMachine"]
+
 [node name="StatusStateMachine" type="Node" parent="."]
 script = ExtResource( 10 )
 START_STATE = NodePath("Normal")

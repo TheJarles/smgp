@@ -39,6 +39,6 @@ func _on_received_damage():
 	current_state._on_received_damage()
 
 
-func _on_animation_changed():
+func _on_animation_changed(prev, next):
 	if current_state == $Idling:
-		current_state._on_animation_changed()
+		current_state._on_animation_changed(prev, next)
