@@ -13,6 +13,8 @@ func handle_input(event):
 			emit_signal("finished", "jumping")
 		else:
 			owner.get_node("BufferTimer").start()
+	if event.is_action_pressed("down"):
+		emit_signal("finished", "crouching")
 
 
 func update(delta):

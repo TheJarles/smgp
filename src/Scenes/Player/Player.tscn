@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://src/Scenes/Player/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/animated_sprites/watson_move_set.png" type="Texture" id=2]
@@ -8,15 +8,50 @@
 [ext_resource path="res://src/Scenes/Player/Scripts/States/Motion/InAir/Jumping.gd" type="Script" id=6]
 [ext_resource path="res://src/Scenes/Player/Scripts/States/Motion/InAir/Staggering.gd" type="Script" id=7]
 [ext_resource path="res://src/Scenes/Player/Scripts/States/Motion/InAir/Falling.gd" type="Script" id=8]
-[ext_resource path="res://src/Scenes/Player/Scripts/StatusStateMachine.gd" type="Script" id=9]
-[ext_resource path="res://src/Scenes/Player/Scripts/States/Invulnerable.gd" type="Script" id=10]
-[ext_resource path="res://src/Scenes/Player/Scripts/States/Normal.gd" type="Script" id=11]
+[ext_resource path="res://src/Scenes/Player/Scripts/States/Motion/OnGround/Crouching.gd" type="Script" id=9]
+[ext_resource path="res://src/Scenes/Player/Scripts/StatusStateMachine.gd" type="Script" id=10]
+[ext_resource path="res://src/Scenes/Player/Scripts/States/Invulnerable.gd" type="Script" id=11]
+[ext_resource path="res://src/Scenes/Player/Scripts/States/Normal.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 14.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6.5, 15.5 )
+
+[sub_resource type="Animation" id=31]
+resource_name = "Crouch Left"
+length = 0.24
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 309, 310, 311, 312 ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "Crouch Right"
+length = 0.24
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 304, 305, 306, 307 ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.36
@@ -317,7 +352,7 @@ tracks/0/keys = {
 "values": [ 7, 8, 9, 10, 11, 12, 13, 0, 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=21]
 resource_name = "Slam Left"
 length = 0.48
 step = 0.06
@@ -334,7 +369,7 @@ tracks/0/keys = {
 "values": [ 338, 339, 340, 341, 342, 343, 344 ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=22]
 resource_name = "Slam Left Stationary"
 length = 0.48
 step = 0.06
@@ -351,7 +386,7 @@ tracks/0/keys = {
 "values": [ 323, 324, 325, 326, 327, 328, 329 ]
 }
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=23]
 resource_name = "Slam Right"
 length = 0.48
 step = 0.06
@@ -368,7 +403,7 @@ tracks/0/keys = {
 "values": [ 330, 331, 332, 333, 334, 335, 336 ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=24]
 resource_name = "Slam Right Stationary"
 length = 0.48
 step = 0.06
@@ -385,7 +420,7 @@ tracks/0/keys = {
 "values": [ 315, 316, 317, 318, 319, 320, 321 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=25]
 length = 0.18
 step = 0.18
 tracks/0/type = "value"
@@ -401,7 +436,7 @@ tracks/0/keys = {
 "values": [ 78 ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=26]
 length = 0.18
 step = 0.18
 tracks/0/type = "value"
@@ -417,7 +452,41 @@ tracks/0/keys = {
 "values": [ 75 ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=32]
+resource_name = "Stand Left"
+length = 0.12
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 328, 329 ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "Stand Right"
+length = 0.12
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 320, 321 ]
+}
+
+[sub_resource type="Animation" id=27]
 length = 0.18
 step = 0.12
 tracks/0/type = "value"
@@ -433,7 +502,7 @@ tracks/0/keys = {
 "values": [ 81, 82 ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=28]
 length = 0.18
 step = 0.12
 tracks/0/type = "value"
@@ -449,7 +518,7 @@ tracks/0/keys = {
 "values": [ 84, 85 ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=29]
 length = 0.08
 loop = true
 tracks/0/type = "value"
@@ -475,7 +544,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 23
 hframes = 15
-frame = 336
+frame = 343
 
 [node name="StandingHitbox" type="CollisionShape2D" parent="."]
 visible = false
@@ -488,6 +557,8 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Crouch Left" = SubResource( 31 )
+"anims/Crouch Right" = SubResource( 30 )
 "anims/Fall Left" = SubResource( 3 )
 "anims/Fall Right" = SubResource( 4 )
 "anims/Fall Start Left" = SubResource( 5 )
@@ -506,17 +577,19 @@ disabled = true
 "anims/Land Right Stationary" = SubResource( 18 )
 "anims/Run Left" = SubResource( 19 )
 "anims/Run Right" = SubResource( 20 )
-"anims/Slam Left" = SubResource( 26 )
-"anims/Slam Left Stationary" = SubResource( 27 )
-"anims/Slam Right" = SubResource( 28 )
-"anims/Slam Right Stationary" = SubResource( 29 )
-"anims/Stagger Left" = SubResource( 21 )
-"anims/Stagger Right" = SubResource( 22 )
-"anims/Turn Left" = SubResource( 23 )
-"anims/Turn Right" = SubResource( 24 )
+"anims/Slam Left" = SubResource( 21 )
+"anims/Slam Left Stationary" = SubResource( 22 )
+"anims/Slam Right" = SubResource( 23 )
+"anims/Slam Right Stationary" = SubResource( 24 )
+"anims/Stagger Left" = SubResource( 25 )
+"anims/Stagger Right" = SubResource( 26 )
+"anims/Stand Left" = SubResource( 32 )
+"anims/Stand Right" = SubResource( 33 )
+"anims/Turn Left" = SubResource( 27 )
+"anims/Turn Right" = SubResource( 28 )
 
 [node name="EffectsPlayer" type="AnimationPlayer" parent="."]
-anims/Damage = SubResource( 25 )
+anims/Damage = SubResource( 29 )
 
 [node name="BufferTimer" type="Timer" parent="."]
 process_mode = 0
@@ -561,12 +634,15 @@ script = ExtResource( 7 )
 [node name="Falling" type="Node" parent="PlayerStateMachine"]
 script = ExtResource( 8 )
 
-[node name="StatusStateMachine" type="Node" parent="."]
+[node name="Crouching" type="Node" parent="PlayerStateMachine"]
 script = ExtResource( 9 )
+
+[node name="StatusStateMachine" type="Node" parent="."]
+script = ExtResource( 10 )
 START_STATE = NodePath("Normal")
 
 [node name="Invulnerable" type="Node" parent="StatusStateMachine"]
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Normal" type="Node" parent="StatusStateMachine"]
-script = ExtResource( 11 )
+script = ExtResource( 12 )

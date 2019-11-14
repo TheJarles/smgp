@@ -7,10 +7,10 @@ func enter():
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	var current_animation = animation_player.get_current_animation()
 	var animation_name = "Run " + animation_flip
-	if current_animation.begins_with("Turn") or current_animation.begins_with("Slam"):
+	if current_animation.begins_with("Turn") or current_animation.begins_with("Slam") or current_animation.begins_with("Stand"):
 		animation_player.clear_queue()
 		animation_player.queue(animation_name)
-	elif current_animation:
+	else:
 		animation_player.clear_queue()
 		animation_player.play(animation_name)
 	.enter()

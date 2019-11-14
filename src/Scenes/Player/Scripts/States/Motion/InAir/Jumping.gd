@@ -130,6 +130,8 @@ func update(delta):
 			emit_signal("finished", "jumping")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 			emit_signal("finished", "running")
+		elif Input.is_action_pressed("down"):
+			emit_signal("finished", "crouching")
 		else:
 			emit_signal("finished", "idling")
 
