@@ -6,9 +6,12 @@ func enter():
 	var animation_name = "Crouch " + animation_flip
 	var current_animation = animation_player.get_current_animation()
 	var pos = animation_player.get_current_animation_position()
-	animation_player.play(animation_name)
-	if current_animation.begins_with("Land") and pos <= 0.3 and pos > 0.06:
-		animation_player.advance(0.06)
+	if current_animation.begins_with("Land") and pos <= 0.3 and pos > 0.06 or \
+	current_animation.begins_with("Slam") and pos > 0.36:
+		animation_name += " Low"
+		animation_player.play(animation_name)
+	elif !current_animation.begins_with("Slam"):
+		animation_player.play(animation_name)
 	velocity = enter_velocity
 
 
@@ -31,7 +34,13 @@ func exit():
 
 func update(delta):
 	var direction = get_input_direction()
-	update_look_direction(direction)
+	if !animation_player.get_current_animation().begins_with("Slam"):
+		update_look_direction(direction)
+	elif animation_player.get_current_animation_position() >= 0.36:
+		var animation_name = "Crouch " + animation_flip + " Low"
+		animation_player.play(animation_name)
+		animation_player.advance(0.01)
+
 	if sign(enter_velocity.x) > 0:
 		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION / 3), 0)
 	elif sign(enter_velocity.x) < 0:
@@ -42,7 +51,7 @@ func update(delta):
 	velocity.y = GRAVITY
 	owner.check_for_collision_damage()
 	.update(delta)
-
+	
 
 func _on_received_damage():
 	emit_signal("finished", "staggering")
@@ -52,13 +61,11 @@ func _on_direction_changed(direction):
 	animation_flip = "Right" if direction == 1 else "Left"
 	if animation_player.get_current_animation() == "":
 		if direction == 1:
-			animation_player.play("Crouch Right")
+			animation_player.play("Crouch Right Low")
 		else:
-			animation_player.play("Crouch Left")
-		animation_player.advance(0.06)
+			animation_player.play("Crouch Left Low")
 
 
 func _on_animation_finished(animation):
 	if animation.begins_with("Stand"):
 		emit_signal("finished", "running")
-	

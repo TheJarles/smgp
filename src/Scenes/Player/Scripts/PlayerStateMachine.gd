@@ -10,6 +10,7 @@ func _ready():
 		"falling": $Falling,
 		"crouching": $Crouching,
 	}
+	owner.get_node("AnimationPlayer").connect("animation_changed", self, "_on_animation_changed")
 	owner.connect("direction_changed", self, "_on_direction_changed")
 	owner.get_node("AnimationPlayer").connect("animation_finished", self, "_on_animation_finished")
 	owner.get_node("AnimationPlayer").set_animation_process_mode(0)
@@ -36,3 +37,8 @@ func _on_timed_out():
 
 func _on_received_damage():
 	current_state._on_received_damage()
+
+
+func _on_animation_changed():
+	if current_state == $Idling:
+		current_state._on_animation_changed()

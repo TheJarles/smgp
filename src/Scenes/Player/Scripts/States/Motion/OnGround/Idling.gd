@@ -1,5 +1,6 @@
 extends "./OnGround.gd"
 
+
 func enter():
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	var animation_name = "Idle " + animation_flip if !Input.is_action_pressed("up") else "Idle Up " + animation_flip
@@ -15,10 +16,12 @@ func enter():
 	.enter()
 
 func handle_input(event):
-	if !animation_player.get_current_animation().begins_with("Slam"):
+#	if !animation_player.get_current_animation().begins_with("Slam") and \
+#	!animation_player.get_current_animation().begins_with("Stand"):
+	if animation_player.get_current_animation().begins_with("Idle"):
 		var animation_name = "Idle "
 		var pos = animation_player.get_current_animation_position()
-	
+		#TODO: put animation in queue if Slam is playing instead of skipping entirely
 		if event.is_action_pressed("up"):
 			animation_name += "Up " + animation_flip
 			if animation_player.get_current_animation().find("Up") == -1:
@@ -51,3 +54,11 @@ func update(delta):
 
 func _on_received_damage():
 	emit_signal("finished", "staggering")
+
+
+func _on_animation_changed(prev, next):
+	print(animation_player.get_queue())
+	if (prev.begins_with("Slam") or prev.begins_with("Stand") or prev.begins_with("Land")) and Input.is_action_pressed("up"):
+		animation_player.clear_queue()
+		var animation_name = "Idle Up " + animation_flip
+		animation_player.play(animation_name)

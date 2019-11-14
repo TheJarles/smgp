@@ -9,7 +9,7 @@ func enter():
 func handle_input(event):
 	if event.is_action_pressed("jump"):
 		if !animation_player.get_current_animation().begins_with("Slam") or \
-		animation_player.get_current_animation_position() > 0.42:
+		animation_player.get_current_animation_position() > 0.36:
 			emit_signal("finished", "jumping")
 		else:
 			owner.get_node("BufferTimer").start()
