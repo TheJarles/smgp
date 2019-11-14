@@ -4,7 +4,7 @@ func enter():
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	var animation_name = "Idle " + animation_flip if !Input.is_action_pressed("up") else "Idle Up " + animation_flip
 	var current_animation = animation_player.get_current_animation()
-	if current_animation.begins_with("Turn") or current_animation.begins_with("Land"):
+	if current_animation.begins_with("Turn") or current_animation.begins_with("Land") or current_animation.begins_with("Slam"):
 		animation_player.clear_queue()
 		animation_player.queue(animation_name)
 	else:
