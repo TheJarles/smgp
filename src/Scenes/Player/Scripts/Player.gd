@@ -4,7 +4,7 @@ signal direction_changed(new_direction)
 signal collided(collision, actor)
 
 var look_direction = 1 setget set_look_direction
-
+var previous_direction = 0
 
 func set_look_direction(value):
 	look_direction = value

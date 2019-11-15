@@ -49,7 +49,6 @@ func _on_timed_out():
 
 
 func _on_stagger_timed_out():
-	print(stagger_timer.get_time_left())
 	if owner.is_on_floor() and Input.is_action_pressed("down"):
 		emit_signal("finished", "crouching")
 	elif owner.is_on_floor() and (Input.is_action_pressed("right") or Input.is_action_pressed("left")):

@@ -21,7 +21,17 @@ func initialize(init_velocity):
 
 func get_input_direction():
 	var input_direction = 0
-	input_direction = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
+	var left = int(Input.is_action_pressed("left"))
+	var right = int(Input.is_action_pressed("right"))
+	input_direction = right - left
+	if left and right:
+		if owner.previous_direction != 2:
+			input_direction = owner.look_direction * -1
+			owner.previous_direction = 2
+		else:
+			input_direction = owner.look_direction
+	else:
+		owner.previous_direction = owner.look_direction
 	return input_direction
 
 
@@ -33,8 +43,8 @@ func seamless_transition(animation_name):
 
 func update_look_direction(direction):
 	if abs(direction - owner.look_direction) == 2:
-		owner.set_look_direction(direction)
-		if direction == -1:
+		owner.set_look_direction(owner.look_direction * -1)
+		if owner.look_direction == -1:
 			owner.get_node("Sprite").set_flip_h(true)
 		else:
 			owner.get_node("Sprite").set_flip_h(false)

@@ -10,7 +10,7 @@ func enter():
 	velocity = enter_velocity
 	velocity.y = GRAVITY
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
-	var animation_variant = "" if enter_velocity.x != 0 else " Stationary"
+	var animation_variant = "" if sign(enter_velocity.x) == sign(owner.look_direction) else " Stationary"
 	var animation_name = "Slam " + animation_flip + animation_variant
 	animation_player.play(animation_name)
 
@@ -26,10 +26,9 @@ func exit():
 
 
 func update(delta):
-	var direction = owner.look_direction
-	if direction == 1:
+	if sign(enter_velocity.x) > 0:
 		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION / 3), 0)
-	else:
+	elif sign(enter_velocity.x) < 0:
 		velocity.x = min(velocity.x + (HORIZONTAL_ACCELERATION / 3), 0)
 	velocity = owner.move_and_slide(velocity, FLOOR)
 	velocity.y = GRAVITY
