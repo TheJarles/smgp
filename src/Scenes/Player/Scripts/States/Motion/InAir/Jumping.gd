@@ -126,7 +126,7 @@ func update(delta):
 #		print("Vertical Distance at Peak: ", abs(jump_height(peak_height)))
 		if damage:
 			emit_signal("finished", "staggering")
-		if fall_distance > 400:
+		elif fall_distance > 400:
 			emit_signal("finished", "slamming")
 		elif buffer_jump:
 			emit_signal("finished", "jumping")
@@ -144,10 +144,6 @@ func _on_direction_changed(direction):
 	var animation_name = animation_player.get_assigned_animation().replace("Left", animation_flip) \
 		if direction == 1 else animation_player.get_assigned_animation().replace("Right", animation_flip)
 	seamless_transition(animation_name)
-
-
-func _on_received_damage():
-	return ._on_received_damage()
 
 
 func _on_momentum_timed_out():

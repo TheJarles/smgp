@@ -42,12 +42,6 @@ func update(delta):
 	velocity.y = min(velocity.y + current_gravity, TERMINAL_VELOCITY)
 	if velocity.y >= 0 and !peak_height:
 		peak_height = owner.get_global_position().y
-	owner.check_for_collision_damage()
-
-
-func exit():
-	stagger_timer.stop()
-	.exit()
 
 
 func _on_timed_out():
@@ -55,7 +49,10 @@ func _on_timed_out():
 
 
 func _on_stagger_timed_out():
-	if owner.is_on_floor() and (Input.is_action_pressed("right") or Input.is_action_pressed("left")):
+	print(stagger_timer.get_time_left())
+	if owner.is_on_floor() and Input.is_action_pressed("down"):
+		emit_signal("finished", "crouching")
+	elif owner.is_on_floor() and (Input.is_action_pressed("right") or Input.is_action_pressed("left")):
 		emit_signal("finished", "running")
 	elif owner.is_on_floor() and buffer_jump:
 		emit_signal("finished", "jumping")

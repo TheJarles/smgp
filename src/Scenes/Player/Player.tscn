@@ -637,6 +637,7 @@ one_shot = true
 [node name="InvTimer" type="Timer" parent="."]
 process_mode = 0
 wait_time = 0.96
+one_shot = true
 
 [node name="MomentumTimer" type="Timer" parent="."]
 process_mode = 0

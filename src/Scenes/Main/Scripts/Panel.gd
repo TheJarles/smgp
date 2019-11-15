@@ -11,6 +11,7 @@ func _ready():
 	$State.text = "State: " + player_state_machine.current_state.get_name()
 	$Status.text = "Status: " + status_state_machine.current_state.get_name()
 	$Animation.text = "Animation: " + animation_player.get_current_animation()
+	set_process(true)
 
 
 func _on_player_state_changed(current_state):
@@ -23,3 +24,7 @@ func _on_status_state_changed(current_state):
 
 func _on_animation_started(animation):
 	$Animation.text = "Animation: " + animation
+
+
+func _process(delta):
+	$Position.text = String(owner.get_node("TileMap").world_to_map(owner.get_node("Player").position))
