@@ -56,9 +56,12 @@ func _on_direction_changed(direction):
 			animation_player.play("Crouch Right Low")
 		else:
 			animation_player.play("Crouch Left Low")
-	else:
+	elif !animation_player.get_current_animation().begins_with("Stand"):
 		var animation_variant = "" if animation_player.get_current_animation().find("Low") == -1 else " Low"
 		var animation_name = "Crouch " + animation_flip + animation_variant
+		seamless_transition(animation_name)
+	else:
+		var animation_name = "Stand " + animation_flip
 		seamless_transition(animation_name)
 
 

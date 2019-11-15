@@ -25,6 +25,7 @@ editor_draw_drag_margin = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
+visible = false
 margin_right = 192.0
 margin_bottom = 256.0
 script = ExtResource( 3 )
