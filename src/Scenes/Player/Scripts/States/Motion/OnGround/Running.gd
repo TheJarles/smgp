@@ -1,7 +1,10 @@
 extends "./OnGround.gd"
 
+var acceleration = HORIZONTAL_ACCELERATION
 
 func enter():
+	print(enter_velocity.x)
+	acceleration = HORIZONTAL_ACCELERATION
 	velocity = enter_velocity
 	velocity.y = GRAVITY
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
@@ -20,7 +23,8 @@ func update(delta):
 	var direction = get_input_direction()
 	if direction != 0:
 		update_look_direction(direction)
-		velocity.x = clamp(velocity.x + (HORIZONTAL_ACCELERATION * direction), -HORIZONTAL_SPEED, HORIZONTAL_SPEED)
+		acceleration = HORIZONTAL_DECELERATION if sign(velocity.x) != owner.look_direction else HORIZONTAL_ACCELERATION
+		velocity.x = clamp(velocity.x + (acceleration * direction), -HORIZONTAL_SPEED, HORIZONTAL_SPEED)
 		velocity = owner.move_and_slide(velocity, FLOOR)
 		velocity.y = GRAVITY
 		owner.check_for_collision_damage()
