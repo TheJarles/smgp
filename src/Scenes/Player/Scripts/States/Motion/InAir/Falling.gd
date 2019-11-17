@@ -69,6 +69,8 @@ func update(delta):
 			emit_signal("finished", "slamming")
 		elif buffer_jump:
 			emit_signal("finished", "jumping")
+		elif Input.is_action_pressed("down") and (Input.is_action_pressed("left") or Input.is_action_pressed("right")):
+			emit_signal("finished", "crawling")
 		elif Input.is_action_pressed("down"):
 			emit_signal("finished", "crouching")
 		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):

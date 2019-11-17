@@ -49,12 +49,15 @@ func _on_timed_out():
 
 
 func _on_stagger_timed_out():
-	if owner.is_on_floor() and Input.is_action_pressed("down"):
+	if owner.is_on_floor() and buffer_jump:
+		emit_signal("finished", "jumping")
+	elif owner.is_on_floor() and Input.is_action_pressed("down") and \
+	(Input.is_action_pressed("right") or Input.is_action_pressed("left")):
+		emit_signal("finished", "crawling")
+	elif owner.is_on_floor() and Input.is_action_pressed("down"):
 		emit_signal("finished", "crouching")
 	elif owner.is_on_floor() and (Input.is_action_pressed("right") or Input.is_action_pressed("left")):
 		emit_signal("finished", "running")
-	elif owner.is_on_floor() and buffer_jump:
-		emit_signal("finished", "jumping")
 	elif owner.is_on_floor():
 		emit_signal("finished", "idling")
 	else:

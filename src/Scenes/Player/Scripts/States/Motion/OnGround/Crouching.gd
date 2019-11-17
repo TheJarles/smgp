@@ -10,18 +10,20 @@ func enter():
 		animation_name += " Low"
 	if !current_animation.begins_with("Crouch"):
 		animation_player.play(animation_name)
+	if current_animation.begins_with("Crawl"):
+		animation_player.advance(animation_player.get_current_animation_length())
 	velocity = enter_velocity
+	velocity.y = GRAVITY
 
 
 func handle_input(event):
 	if event.is_action_released("down"):
-		if Input.is_action_pressed("jump"):
-			emit_signal("finished", "jumping")
-		elif Input.is_action_pressed("right") or Input.is_action_pressed("left"):
+		if Input.is_action_pressed("right") or Input.is_action_pressed("left"):
 			var animation_name = "Stand " + animation_flip
 			animation_player.play(animation_name)
 		else:
 			emit_signal("finished", "idling")
+	.handle_input(event)
 
 
 func exit():
@@ -32,17 +34,20 @@ func exit():
 
 func update(delta):
 	var direction = get_input_direction()
-	update_look_direction(direction)
-	if sign(enter_velocity.x) > 0:
-		velocity.x = max(velocity.x - (HORIZONTAL_ACCELERATION / 3), 0)
-	elif sign(enter_velocity.x) < 0:
-		velocity.x = min(velocity.x + (HORIZONTAL_ACCELERATION / 3), 0)
+	if direction:
+		update_look_direction(direction)
+		emit_signal("finished", "crawling")
 	else:
-		velocity.x = 0
-	velocity = owner.move_and_slide(velocity, FLOOR)
-	velocity.y = GRAVITY
-	owner.check_for_collision_damage()
-	.update(delta)
+		if sign(enter_velocity.x) > 0:
+			velocity.x = max(velocity.x - HORIZONTAL_DECELERATION, 0)
+		elif sign(enter_velocity.x) < 0:
+			velocity.x = min(velocity.x + HORIZONTAL_DECELERATION, 0)
+		else:
+			velocity.x = 0
+		velocity = owner.move_and_slide(velocity, FLOOR)
+		velocity.y = GRAVITY
+		owner.check_for_collision_damage()
+		.update(delta)
 	
 
 func _on_received_damage():

@@ -10,6 +10,7 @@ func _ready():
 		"falling": $Falling,
 		"crouching": $Crouching,
 		"slamming": $Slamming,
+		"crawling": $Crawling,
 	}
 	owner.get_node("AnimationPlayer").connect("animation_changed", self, "_on_animation_changed")
 	owner.connect("direction_changed", self, "_on_direction_changed")

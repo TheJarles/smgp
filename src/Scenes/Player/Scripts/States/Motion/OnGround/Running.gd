@@ -19,6 +19,12 @@ func enter():
 	.enter()
 
 
+func handle_input(event):
+	if event.is_action_pressed("down"):
+		emit_signal("finished", "crawling")
+	.handle_input(event)
+
+
 func update(delta):
 	var direction = get_input_direction()
 	if direction != 0:

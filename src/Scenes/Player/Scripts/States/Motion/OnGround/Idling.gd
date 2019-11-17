@@ -29,15 +29,15 @@ func handle_input(event):
 			animation_name += animation_flip
 			if animation_player.get_current_animation().find("Up") != -1:
 				seamless_transition(animation_name)
-		else:
-			return .handle_input(event)
+	if event.is_action_pressed("down"):
+		emit_signal("finished", "crouching")
 	.handle_input(event)
 
 
 func update(delta):
-	var input_direction = get_input_direction()
-	if input_direction and !animation_player.get_current_animation().begins_with("Stand"):
-		update_look_direction(input_direction)
+	var direction = get_input_direction()
+	if direction and !animation_player.get_current_animation().begins_with("Stand"):
+		update_look_direction(direction)
 		emit_signal("finished", "running")
 	else:
 		if owner.look_direction == 1:

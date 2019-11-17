@@ -40,11 +40,13 @@ func _on_animation_finished(animation):
 	if animation.begins_with("Slam"):
 		if buffer_jump:
 			emit_signal("finished", "jumping")
+		elif Input.is_action_pressed("down") and (Input.is_action_pressed("right") or Input.is_action_pressed("left")):
+			emit_signal("finished", "crawling")
 		elif Input.is_action_pressed("down"):
 			var animation_name = "Crouch " + animation_flip + " Low"
 			animation_player.play(animation_name)
 			emit_signal("finished", "crouching")
-		elif Input.is_action_pressed("right") or Input.is_action_pressed("right") or Input.is_action_pressed("left"):
+		elif Input.is_action_pressed("right") or Input.is_action_pressed("left"):
 			var animation_name = "Stand " + animation_flip
 			animation_player.play(animation_name)
 		else:
