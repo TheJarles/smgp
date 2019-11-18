@@ -512,7 +512,7 @@ tracks/0/keys = {
 "values": [ 328, 329 ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=33]
 resource_name = "Stand Left Crawl"
 length = 0.18
 step = 0.06
@@ -529,7 +529,7 @@ tracks/0/keys = {
 "values": [ 312, 328, 329 ]
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=34]
 length = 0.12
 step = 0.06
 tracks/0/type = "value"
@@ -545,7 +545,7 @@ tracks/0/keys = {
 "values": [ 320, 321 ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=35]
 length = 0.18
 step = 0.12
 tracks/0/type = "value"
@@ -561,7 +561,7 @@ tracks/0/keys = {
 "values": [ 81, 82 ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=36]
 length = 0.18
 step = 0.12
 tracks/0/type = "value"
@@ -577,7 +577,7 @@ tracks/0/keys = {
 "values": [ 84, 85 ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=37]
 length = 0.08
 loop = true
 tracks/0/type = "value"
@@ -603,7 +603,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 24
 hframes = 15
-frame = 329
+frame = 307
 
 [node name="StandingHitbox" type="CollisionShape2D" parent="."]
 visible = false
@@ -646,14 +646,14 @@ disabled = true
 "anims/Stagger Left" = SubResource( 30 )
 "anims/Stagger Right" = SubResource( 31 )
 "anims/Stand Left" = SubResource( 32 )
-"anims/Stand Left Crawl" = SubResource( 37 )
-"anims/Stand Right" = SubResource( 33 )
-"anims/Stand Right Crawl" = SubResource( 37 )
-"anims/Turn Left" = SubResource( 34 )
-"anims/Turn Right" = SubResource( 35 )
+"anims/Stand Left Crawl" = SubResource( 33 )
+"anims/Stand Right" = SubResource( 34 )
+"anims/Stand Right Crawl" = SubResource( 33 )
+"anims/Turn Left" = SubResource( 35 )
+"anims/Turn Right" = SubResource( 36 )
 
 [node name="EffectsPlayer" type="AnimationPlayer" parent="."]
-anims/Damage = SubResource( 36 )
+anims/Damage = SubResource( 37 )
 
 [node name="BufferTimer" type="Timer" parent="."]
 process_mode = 0

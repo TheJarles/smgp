@@ -54,22 +54,6 @@ func _on_received_damage():
 	emit_signal("finished", "staggering")
 
 
-func _on_direction_changed(direction):
-	animation_flip = "Right" if direction == 1 else "Left"
-	if animation_player.get_current_animation() == "":
-		if direction == 1:
-			animation_player.play("Crouch Right Low")
-		else:
-			animation_player.play("Crouch Left Low")
-	elif !animation_player.get_current_animation().begins_with("Stand"):
-		var animation_variant = "" if animation_player.get_current_animation().find("Low") == -1 else " Low"
-		var animation_name = "Crouch " + animation_flip + animation_variant
-		seamless_transition(animation_name)
-	else:
-		var animation_name = "Stand " + animation_flip
-		seamless_transition(animation_name)
-
-
 func _on_animation_finished(animation):
 	if animation.begins_with("Stand"):
 		emit_signal("finished", "running")
