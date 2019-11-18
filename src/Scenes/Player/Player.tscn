@@ -21,11 +21,10 @@ extents = Vector2( 6.5, 14.5 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6.5, 15.5 )
 
-[sub_resource type="RectangleShape2D" id=38]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6.5, 10 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "Crawl Right"
+[sub_resource type="Animation" id=4]
 length = 0.8
 loop = true
 step = 0.08
@@ -42,7 +41,7 @@ tracks/0/keys = {
 "values": [ 349, 350, 351, 352, 353, 354, 355, 356, 357, 358 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.24
 step = 0.06
 tracks/0/type = "value"
@@ -58,7 +57,7 @@ tracks/0/keys = {
 "values": [ 309, 310, 311, 312 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.18
 step = 0.06
 tracks/0/type = "value"
@@ -74,7 +73,7 @@ tracks/0/keys = {
 "values": [ 347, 311, 312 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.24
 step = 0.06
 tracks/0/type = "value"
@@ -90,7 +89,7 @@ tracks/0/keys = {
 "values": [ 304, 305, 306, 307 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.18
 step = 0.06
 tracks/0/type = "value"
@@ -104,23 +103,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 345, 306, 307 ]
-}
-
-[sub_resource type="Animation" id=8]
-length = 0.36
-loop = true
-step = 0.06
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 52, 53, 54, 55, 56, 57 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -137,10 +119,27 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 45, 46, 47, 48, 49, 50 ]
+"values": [ 52, 53, 54, 55, 56, 57 ]
 }
 
 [sub_resource type="Animation" id=10]
+length = 0.36
+loop = true
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 45, 46, 47, 48, 49, 50 ]
+}
+
+[sub_resource type="Animation" id=11]
 length = 0.06
 loop = true
 tracks/0/type = "value"
@@ -156,7 +155,7 @@ tracks/0/keys = {
 "values": [ 302 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.06
 loop = true
 step = 0.06
@@ -173,7 +172,7 @@ tracks/0/keys = {
 "values": [ 300 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 3.36
 loop = true
 step = 0.08
@@ -190,7 +189,7 @@ tracks/0/keys = {
 "values": [ 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 3.36
 loop = true
 step = 0.08
@@ -207,7 +206,7 @@ tracks/0/keys = {
 "values": [ 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 3.36
 loop = true
 step = 0.08
@@ -224,7 +223,7 @@ tracks/0/keys = {
 "values": [ 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 length = 3.36
 loop = true
 step = 0.08
@@ -241,7 +240,7 @@ tracks/0/keys = {
 "values": [ 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -257,7 +256,7 @@ tracks/0/keys = {
 "values": [ 37, 38, 39, 40, 41, 42 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -273,7 +272,7 @@ tracks/0/keys = {
 "values": [ 277, 278, 279, 280, 281, 282 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.36
 step = 0.03
 tracks/0/type = "value"
@@ -289,7 +288,7 @@ tracks/0/keys = {
 "values": [ 30, 31, 32, 33, 34, 35 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -305,7 +304,7 @@ tracks/0/keys = {
 "values": [ 270, 271, 272, 273, 274, 275 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=21]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -321,7 +320,7 @@ tracks/0/keys = {
 "values": [ 67, 68, 69, 70, 71, 72 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=22]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -337,7 +336,7 @@ tracks/0/keys = {
 "values": [ 292, 293, 294, 295, 296, 297 ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=23]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -353,7 +352,7 @@ tracks/0/keys = {
 "values": [ 60, 61, 62, 63, 64, 65 ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=24]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -367,23 +366,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 285, 286, 287, 288, 289, 290 ]
-}
-
-[sub_resource type="Animation" id=24]
-length = 0.84
-loop = true
-step = 0.06
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, 0.6, 0.66, 0.72, 0.78 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 22, 23, 24, 25, 26, 27, 28, 15, 16, 17, 18, 19, 20, 21 ]
 }
 
 [sub_resource type="Animation" id=25]
@@ -400,11 +382,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, 0.6, 0.66, 0.72, 0.78 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 7, 8, 9, 10, 11, 12, 13, 0, 1, 2, 3, 4, 5, 6 ]
+"values": [ 22, 23, 24, 25, 26, 27, 28, 15, 16, 17, 18, 19, 20, 21 ]
 }
 
 [sub_resource type="Animation" id=26]
-length = 0.36
+length = 0.84
+loop = true
 step = 0.06
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -413,10 +396,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, 0.6, 0.66, 0.72, 0.78 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 338, 339, 340, 341, 342 ]
+"values": [ 7, 8, 9, 10, 11, 12, 13, 0, 1, 2, 3, 4, 5, 6 ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -432,7 +415,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 323, 324, 325, 326, 327 ]
+"values": [ 338, 339, 340, 341, 342 ]
 }
 
 [sub_resource type="Animation" id=28]
@@ -448,7 +431,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 330, 331, 332, 333, 334 ]
+"values": [ 323, 324, 325, 326, 327 ]
 }
 
 [sub_resource type="Animation" id=29]
@@ -464,12 +447,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 315, 316, 317, 318, 319 ]
+"values": [ 330, 331, 332, 333, 334 ]
 }
 
 [sub_resource type="Animation" id=30]
-length = 0.18
-step = 0.18
+length = 0.36
+step = 0.06
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -477,10 +460,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 78 ]
+"values": [ 315, 316, 317, 318, 319 ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -496,10 +479,26 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 75 ]
+"values": [ 78 ]
 }
 
 [sub_resource type="Animation" id=32]
+length = 0.18
+step = 0.18
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 75 ]
+}
+
+[sub_resource type="Animation" id=33]
 length = 0.12
 step = 0.06
 tracks/0/type = "value"
@@ -515,8 +514,7 @@ tracks/0/keys = {
 "values": [ 328, 329 ]
 }
 
-[sub_resource type="Animation" id=33]
-resource_name = "Stand Left Crawl"
+[sub_resource type="Animation" id=34]
 length = 0.18
 step = 0.06
 tracks/0/type = "value"
@@ -532,7 +530,7 @@ tracks/0/keys = {
 "values": [ 312, 328, 329 ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=35]
 length = 0.12
 step = 0.06
 tracks/0/type = "value"
@@ -548,7 +546,7 @@ tracks/0/keys = {
 "values": [ 320, 321 ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=36]
 length = 0.18
 step = 0.12
 tracks/0/type = "value"
@@ -564,7 +562,7 @@ tracks/0/keys = {
 "values": [ 81, 82 ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=37]
 length = 0.18
 step = 0.12
 tracks/0/type = "value"
@@ -580,7 +578,7 @@ tracks/0/keys = {
 "values": [ 84, 85 ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=38]
 length = 0.08
 loop = true
 tracks/0/type = "value"
@@ -621,47 +619,58 @@ disabled = true
 
 [node name="CrouchingHitbox" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7 )
-shape = SubResource( 38 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="CrouchingRayLeft" type="RayCast2D" parent="."]
+position = Vector2( -6.5, 0 )
+enabled = true
+cast_to = Vector2( 0, -7 )
+
+[node name="CrouchingRayRight" type="RayCast2D" parent="."]
+position = Vector2( 6.5, 0 )
+enabled = true
+cast_to = Vector2( 0, -7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/Crawl Right" = SubResource( 3 )
-"anims/Crouch Left" = SubResource( 4 )
-"anims/Crouch Left Low" = SubResource( 5 )
-"anims/Crouch Right" = SubResource( 6 )
-"anims/Crouch Right Low" = SubResource( 7 )
-"anims/Fall Left" = SubResource( 8 )
-"anims/Fall Right" = SubResource( 9 )
-"anims/Fall Start Left" = SubResource( 10 )
-"anims/Fall Start Right" = SubResource( 11 )
-"anims/Idle Left" = SubResource( 12 )
-"anims/Idle Right" = SubResource( 13 )
-"anims/Idle Up Left" = SubResource( 14 )
-"anims/Idle Up Right" = SubResource( 15 )
-"anims/Jump Left" = SubResource( 16 )
-"anims/Jump Left Stationary" = SubResource( 17 )
-"anims/Jump Right" = SubResource( 18 )
-"anims/Jump Right Stationary" = SubResource( 19 )
-"anims/Land Left" = SubResource( 20 )
-"anims/Land Left Stationary" = SubResource( 21 )
-"anims/Land Right" = SubResource( 22 )
-"anims/Land Right Stationary" = SubResource( 23 )
-"anims/Run Left" = SubResource( 24 )
-"anims/Run Right" = SubResource( 25 )
-"anims/Slam Left" = SubResource( 26 )
-"anims/Slam Left Stationary" = SubResource( 27 )
-"anims/Slam Right" = SubResource( 28 )
-"anims/Slam Right Stationary" = SubResource( 29 )
-"anims/Stagger Left" = SubResource( 30 )
-"anims/Stagger Right" = SubResource( 31 )
-"anims/Stand Left" = SubResource( 32 )
-"anims/Stand Left Crawl" = SubResource( 33 )
-"anims/Stand Right" = SubResource( 34 )
-"anims/Stand Right Crawl" = SubResource( 33 )
-"anims/Turn Left" = SubResource( 35 )
-"anims/Turn Right" = SubResource( 36 )
+"anims/Crawl Right" = SubResource( 4 )
+"anims/Crouch Left" = SubResource( 5 )
+"anims/Crouch Left Low" = SubResource( 6 )
+"anims/Crouch Right" = SubResource( 7 )
+"anims/Crouch Right Low" = SubResource( 8 )
+"anims/Fall Left" = SubResource( 9 )
+"anims/Fall Right" = SubResource( 10 )
+"anims/Fall Start Left" = SubResource( 11 )
+"anims/Fall Start Right" = SubResource( 12 )
+"anims/Idle Left" = SubResource( 13 )
+"anims/Idle Right" = SubResource( 14 )
+"anims/Idle Up Left" = SubResource( 15 )
+"anims/Idle Up Right" = SubResource( 16 )
+"anims/Jump Left" = SubResource( 17 )
+"anims/Jump Left Stationary" = SubResource( 18 )
+"anims/Jump Right" = SubResource( 19 )
+"anims/Jump Right Stationary" = SubResource( 20 )
+"anims/Land Left" = SubResource( 21 )
+"anims/Land Left Stationary" = SubResource( 22 )
+"anims/Land Right" = SubResource( 23 )
+"anims/Land Right Stationary" = SubResource( 24 )
+"anims/Run Left" = SubResource( 25 )
+"anims/Run Right" = SubResource( 26 )
+"anims/Slam Left" = SubResource( 27 )
+"anims/Slam Left Stationary" = SubResource( 28 )
+"anims/Slam Right" = SubResource( 29 )
+"anims/Slam Right Stationary" = SubResource( 30 )
+"anims/Stagger Left" = SubResource( 31 )
+"anims/Stagger Right" = SubResource( 32 )
+"anims/Stand Left" = SubResource( 33 )
+"anims/Stand Left Crawl" = SubResource( 34 )
+"anims/Stand Right" = SubResource( 35 )
+"anims/Stand Right Crawl" = SubResource( 34 )
+"anims/Turn Left" = SubResource( 36 )
+"anims/Turn Right" = SubResource( 37 )
 
 [node name="EffectsPlayer" type="AnimationPlayer" parent="."]
-anims/Damage = SubResource( 37 )
+anims/Damage = SubResource( 38 )
 
 [node name="BufferTimer" type="Timer" parent="."]
 process_mode = 0

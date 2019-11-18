@@ -2,6 +2,9 @@ extends "./OnGround.gd"
 
 
 func enter():
+	owner.get_node("JumpingHitbox").set_disabled(true)
+	owner.get_node("StandingHitbox").set_disabled(true)
+	owner.get_node("CrouchingHitbox").set_disabled(false)
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	var animation_name = "Crouch " + animation_flip
 	var current_animation = animation_player.get_current_animation()
@@ -16,14 +19,14 @@ func enter():
 	velocity.y = GRAVITY
 
 
+func raycast_collision():
+	return owner.get_node("CrouchingRayLeft").is_colliding() or \
+	owner.get_node("CrouchingRayRight").is_colliding()
+
+
 func handle_input(event):
-	if event.is_action_released("down"):
-		if Input.is_action_pressed("right") or Input.is_action_pressed("left"):
-			var animation_name = "Stand " + animation_flip
-			animation_player.play(animation_name)
-		else:
-			emit_signal("finished", "idling")
-	.handle_input(event)
+	if !raycast_collision() and event.is_action_pressed("jump"):
+		emit_signal("finished", "jumping")
 
 
 func exit():
@@ -33,6 +36,12 @@ func exit():
 
 
 func update(delta):
+	if !Input.is_action_pressed("down") and !raycast_collision():
+		if Input.is_action_pressed("right") or Input.is_action_pressed("left"):
+			var animation_name = "Stand " + animation_flip
+			animation_player.play(animation_name)
+		else:
+			emit_signal("finished", "idling")
 	var direction = get_input_direction()
 	if direction:
 		update_look_direction(direction)

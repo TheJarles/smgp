@@ -2,6 +2,7 @@ extends "../Motion.gd"
 
 
 func enter():
+	owner.get_node("CrouchingHitbox").set_disabled(true)
 	owner.get_node("JumpingHitbox").set_disabled(true)
 	owner.get_node("StandingHitbox").set_disabled(false)
 

@@ -3,28 +3,39 @@ extends "./OnGround.gd"
 export(float) var CRAWL_SPEED = HORIZONTAL_SPEED / 3
 
 func enter():
+	owner.get_node("JumpingHitbox").set_disabled(true)
+	owner.get_node("StandingHitbox").set_disabled(true)
+	owner.get_node("CrouchingHitbox").set_disabled(false)
 	velocity = enter_velocity
 	velocity.y = GRAVITY
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
 	animation_player.play("Crawl Right")
 
 
+func raycast_collision():
+	return owner.get_node("CrouchingRayLeft").is_colliding() or \
+	owner.get_node("CrouchingRayRight").is_colliding()
+
+
 func handle_input(event):
-	if event.is_action_released("down"):
-		if Input.is_action_pressed("right") or Input.is_action_pressed("left"):
-			var animation_name = "Stand " + animation_flip + " Crawl"
+	if !raycast_collision():
+		if event.is_action_pressed("jump"):
+			emit_signal("finished", "jumping")
+	if event.is_action_pressed("down"):
+		var animation_name = "Crawl Right"
+		if !animation_player.get_current_animation().begins_with("Crawl"):
 			animation_player.play(animation_name)
+
+
+func update(delta):
+	if !Input.is_action_pressed("down") and !raycast_collision():
+		if Input.is_action_pressed("right") or Input.is_action_pressed("left"):
+				var animation_name = "Stand " + animation_flip + " Crawl"
+				animation_player.play(animation_name)
 		else:
 			var animation_name = "Stand " + animation_flip + " Crawl"
 			animation_player.play(animation_name)
 			emit_signal("finished", "idling")
-	if event.is_action_pressed("down"):
-		var animation_name = "Crawl Right"
-		animation_player.play(animation_name)
-	.handle_input(event)
-
-
-func update(delta):
 	var direction = get_input_direction()
 	update_look_direction(direction)
 	if abs(velocity.x) > CRAWL_SPEED:
