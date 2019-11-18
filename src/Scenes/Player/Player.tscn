@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://src/Scenes/Player/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/animated_sprites/watson_move_set.png" type="Texture" id=2]
@@ -20,6 +20,9 @@ extents = Vector2( 6.5, 14.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6.5, 15.5 )
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 6.5, 10 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Crawl Right"
@@ -603,7 +606,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 24
 hframes = 15
-frame = 307
+frame = 356
 
 [node name="StandingHitbox" type="CollisionShape2D" parent="."]
 visible = false
@@ -611,9 +614,14 @@ position = Vector2( 0, 2.5 )
 shape = SubResource( 1 )
 
 [node name="JumpingHitbox" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, 1.5 )
 shape = SubResource( 2 )
 disabled = true
+
+[node name="CrouchingHitbox" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 7 )
+shape = SubResource( 38 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/Crawl Right" = SubResource( 3 )
