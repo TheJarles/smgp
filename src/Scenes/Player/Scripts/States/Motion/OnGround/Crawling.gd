@@ -9,7 +9,8 @@ func enter():
 	velocity = enter_velocity
 	velocity.y = GRAVITY
 	animation_flip = "Right" if owner.look_direction == 1 else "Left"
-	animation_player.play("Crawl Right")
+	var animation_name = "Crawl " + animation_flip
+	animation_player.play(animation_name)
 
 
 func raycast_collision():
@@ -62,6 +63,8 @@ func _on_direction_changed(direction):
 	if animation_player.get_current_animation().begins_with("Stand"):
 		var animation_name = "Stand " + animation_flip
 		seamless_transition(animation_name)
+	else:
+		var animation_name = "Crawl " + animation_flip
 
 
 func _on_received_damage():
