@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://src/Scenes/Player/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/animated_sprites/watson_move_set.png" type="Texture" id=2]
@@ -533,6 +533,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=35]
+resource_name = "Stand Left Crawl"
 length = 0.18
 step = 0.06
 tracks/0/type = "value"
@@ -566,7 +567,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=37]
 length = 0.18
-step = 0.12
+step = 0.06
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -574,10 +575,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.12 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.06, 0.12 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 81, 82 ]
+"values": [ 307, 320, 321 ]
 }
 
 [sub_resource type="Animation" id=38]
@@ -593,10 +594,26 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.12 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 84, 85 ]
+"values": [ 81, 82 ]
 }
 
 [sub_resource type="Animation" id=39]
+length = 0.18
+step = 0.12
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.12 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 84, 85 ]
+}
+
+[sub_resource type="Animation" id=40]
 length = 0.08
 loop = true
 tracks/0/type = "value"
@@ -622,7 +639,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 25
 hframes = 15
-frame = 366
+frame = 360
 
 [node name="StandingHitbox" type="CollisionShape2D" parent="."]
 visible = false
@@ -684,12 +701,12 @@ cast_to = Vector2( 0, -7 )
 "anims/Stand Left" = SubResource( 34 )
 "anims/Stand Left Crawl" = SubResource( 35 )
 "anims/Stand Right" = SubResource( 36 )
-"anims/Stand Right Crawl" = SubResource( 35 )
-"anims/Turn Left" = SubResource( 37 )
-"anims/Turn Right" = SubResource( 38 )
+"anims/Stand Right Crawl" = SubResource( 37 )
+"anims/Turn Left" = SubResource( 38 )
+"anims/Turn Right" = SubResource( 39 )
 
 [node name="EffectsPlayer" type="AnimationPlayer" parent="."]
-anims/Damage = SubResource( 39 )
+anims/Damage = SubResource( 40 )
 
 [node name="BufferTimer" type="Timer" parent="."]
 process_mode = 0

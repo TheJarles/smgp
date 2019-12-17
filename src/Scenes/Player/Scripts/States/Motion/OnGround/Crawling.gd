@@ -23,7 +23,7 @@ func handle_input(event):
 		if event.is_action_pressed("jump"):
 			emit_signal("finished", "jumping")
 	if event.is_action_pressed("down"):
-		var animation_name = "Crawl Right"
+		var animation_name = "Crawl " + animation_flip
 		if !animation_player.get_current_animation().begins_with("Crawl"):
 			animation_player.play(animation_name)
 
@@ -65,6 +65,7 @@ func _on_direction_changed(direction):
 		seamless_transition(animation_name)
 	else:
 		var animation_name = "Crawl " + animation_flip
+		seamless_transition(animation_name)
 
 
 func _on_received_damage():
