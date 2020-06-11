@@ -23,7 +23,7 @@ func enter():
 func exit():
 	buffer_timer.stop()
 	momentum_timer.stop()
-	if fall_distance > 64:
+	if fall_distance > 32:
 		var animation_name = "Land " + animation_flip if velocity.x != 0 \
 		or momentum_buffer else "Land " + animation_flip + " Stationary"
 		animation_player.play(animation_name)

@@ -101,9 +101,9 @@ func update(delta):
 			peak_height = owner.get_global_position().y
 			hang_time = ceil(abs((previous_velocity.y + GRAVITY) / (4 * GRAVITY * HIGH_GRAVITY))) + 1
 	if hang_time:
-		if !animation_player.get_current_animation().begins_with("Fall"):
-			var animation_name = "Fall Start " + animation_flip
-			animation_player.play(animation_name)
+#		if !animation_player.get_current_animation().begins_with("Fall"):
+#			var animation_name = "Fall Start " + animation_flip
+#			animation_player.play(animation_name)
 		velocity.y = -1
 		hang_time -= 1
 	else:
